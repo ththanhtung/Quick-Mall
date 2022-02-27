@@ -1,5 +1,5 @@
-import {Header} from '../Components'
-import './Layout.scss'
+import {Header} from './Components'
+import './styles/style.scss'
 
 function App() {
   return (

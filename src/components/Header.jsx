@@ -1,7 +1,6 @@
 import React from 'react';
-import './Header.scss';
 import { FiShoppingCart } from "react-icons/fi";
-import brandLogo from '../../Assets/Images/bag.png';
+import brandLogo from '../Assets/Images/bag.png';
 
 const Header = () => {
   return (
