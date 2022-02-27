@@ -8,7 +8,7 @@ const Header = () => {
     <header className='flex'>
       <div className="header-container flex">
         <div className="branding flex">
-          <div className="brand-name">Commercial Web App</div>
+          <div className="brand-name">commercial web app</div>
           <img className='brand-logo' src={brandLogo} alt="brand logo" />
         </div>
         <button className='cart-btn'>

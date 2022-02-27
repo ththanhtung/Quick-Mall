@@ -6,14 +6,17 @@
 
 header{
     align-items: center;
-    width: 90vw;
+    width: 100vw;
     margin: 0 auto;
-    height: 20vh;
+    height: max(15vh, 8em);
+    -webkit-box-shadow: 1px 2px 16px 6px rgba(0,0,0,0.28); 
+box-shadow: 1px 2px 16px 6px rgba(0,0,0,0.28);
 }
 
 .header-container{
     width: 100%;
     .branding{
+        margin-left: 3.5em;
         .brand-logo{
             margin-right: 1.5em;
             order:1;
@@ -24,11 +27,13 @@ header{
         .brand-name{
             order:2;
             font-size: 1.5rem;
+            text-transform: uppercase;
         }
     }
     .cart-btn{
         display: flex;
         align-items: center;
+        margin-right: 3.5em;
         justify-content: center;
         width: 4em;
         aspect-ratio: 1;
@@ -42,7 +47,6 @@ header{
     }
     .cart-btn:hover{
         background-color: rgb(231, 40, 104);
-        // transition: background-color 1s linear, color 1s linear;
         color: white;
     }
 }
