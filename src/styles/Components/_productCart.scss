@@ -1,0 +1,53 @@
+@use '../Abstract/' as *;
+
+.center-product{
+    max-width: 30rem;
+    margin: 0 auto;
+    // border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: -1px 6px 9px -2px rgba(0,0,0,0.31); 
+box-shadow: -1px 6px 9px -2px rgba(0,0,0,0.31);
+    .img-product{
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        order: 1;
+    }
+    .info-product{
+        order: 2;
+        padding: .3em;
+        .main-info-product{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .name-product{
+                text-transform: capitalize;
+            }
+        }
+    }
+    .btn-add-to-cart{
+        padding: .3em;
+        background-color: $light_grey;
+        order:3;
+        // background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        .icon-add-to-cart{
+            font-size: 2rem;
+        }
+    }
+    .btn-add-to-cart:hover,
+    .btn-add-to-cart:focus{
+        color: $red_pink; 
+    }
+}
+
+.center-product:hover{
+    -webkit-box-shadow: -1px 6px 19px -2px rgba(250,255,122,0.47); 
+    box-shadow: -1px 6px 19px -2px rgba(250,255,122,0.47);
+    transform: scale(1.03);
+    transition: transform .3s ease-in, box-shadow .3s ease-in;
+    
+    
+}

@@ -1,0 +1,7 @@
+@use '../Responsiveness/' as *;
+
+.container {
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
