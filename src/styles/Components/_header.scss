@@ -1,3 +1,5 @@
+@use '../Abstract/' as *;
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -5,11 +7,12 @@
 }
 
 header{
-    background-color: rgb(245, 240, 240);
+    overflow: hidden;
+    background-color: $dim_white;
     align-items: center;
     width: 100vw;
     margin: 0 auto;
-    height: 12vh;
+    height: max(12vh,5em);
     -webkit-box-shadow: 1px 2px 16px 6px rgba(0,0,0,0.28); 
 box-shadow: 1px 2px 16px 6px rgba(0,0,0,0.28);
 }
@@ -28,6 +31,7 @@ box-shadow: 1px 2px 16px 6px rgba(0,0,0,0.28);
         .brand-name{
             order:2;
             font-size: 1.5rem;
+            font-weight: 700;
             text-transform: uppercase;
         }
     }
