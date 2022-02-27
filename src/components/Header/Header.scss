@@ -1,0 +1,48 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+    align-items: center;
+    width: 90vw;
+    margin: 0 auto;
+    height: 20vh;
+}
+
+.header-container{
+    width: 100%;
+    .branding{
+        .brand-logo{
+            margin-right: 1.5em;
+            order:1;
+            width: 3.2rem;
+            height: 3rem;
+            object-fit: contain;
+        }
+        .brand-name{
+            order:2;
+            font-size: 1.5rem;
+        }
+    }
+    .cart-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4em;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        border: none;
+        .cart-logo{
+            font-size: 2rem;
+        }
+    }
+    .cart-btn:hover{
+        background-color: rgb(231, 40, 104);
+        // transition: background-color 1s linear, color 1s linear;
+        color: white;
+    }
+}
