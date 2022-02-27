@@ -10,7 +10,7 @@ const Header = () => {
     <header className='flex'>
       <div className="header-container flex">
         <div className="branding flex">
-          <div className="brand-name">commercial web app</div>
+          <h1 className="brand-name">commercial web app</h1>
           <img className='brand-logo' src={brandLogo} alt="brand logo" />
         </div>
         <button className='cart-btn' onClick={()=>{navigate('cart')}}>
