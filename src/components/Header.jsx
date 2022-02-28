@@ -11,7 +11,9 @@ const Header = () => {
       <div className="header-container flex">
         <div className="branding flex">
           <h1 className="brand-name">commercial web app</h1>
-          <img className='brand-logo' src={brandLogo} alt="brand logo" />
+          <button className='btn-brand-name' onClick={()=>{navigate('/')}}>
+            <img className='brand-logo' src={brandLogo} alt="brand logo" />
+          </button>
         </div>
         <button className='cart-btn' onClick={()=>{navigate('cart')}}>
           <FiShoppingCart className='cart-logo'title='go to cart'/>

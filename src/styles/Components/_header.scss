@@ -30,6 +30,11 @@ header{
             height: 3rem;
             object-fit: contain;
         }
+        .btn-brand-name{
+            border: 0;
+            background-color: transparent;
+            cursor: pointer;
+        }
         .brand-name{
             order:2;
             font-size: 1.5rem;
