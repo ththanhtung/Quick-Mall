@@ -1,0 +1,71 @@
+@use '../Abstract/' as *;
+
+.container-center-cart-item{
+    // border: 2px solid black;
+    margin-bottom: 1em;
+    height: 20vh;
+    -webkit-box-shadow: -5px 4px 15px -4px rgba(0,0,0,0.3); 
+    box-shadow: -5px 4px 15px -4px rgba(0,0,0,0.3);
+    .info-product{
+        height: 100%;
+        width: 35%;
+        overflow: hidden;
+        .img-product{
+            order: 1;
+            margin-right: 1em;
+            height: 100%;
+            width: 40%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .name-product{
+            order:2;
+            text-transform: capitalize;
+        }
+    }
+    .price-amout-delete-cart-item{
+        width: 50%;
+        height: 100%;
+        .price-product{
+            font-size: 1.4rem;
+        }
+        .amount-products{
+            width: 4rem;
+            button{
+                cursor: pointer;
+                background-color: transparent;
+                border: 0;
+                .icon{
+                    font-size: 1rem;
+                    font-weight: 400;
+                }
+            }
+            .amount-product{
+                font-size: 1.4rem;
+            }
+        }
+        .total-price-products{
+            font-size: 1.4rem;
+        }
+        .btn-delete{
+            cursor: pointer;
+            padding: .5em;
+            overflow: hidden;
+            width: 15%;
+            height: 100%;
+            text-transform: uppercase;
+            border: 0;
+            font-weight: 700;
+        }
+        .btn-delete:hover, 
+        .btn-delete:focus{
+           background-color: $hot_red;
+           color: white;
+           transition: background-color .1s linear;
+            p{
+                transform: scale(1.4);
+                transition: transform .4s ease;
+            }
+        }
+    }
+}

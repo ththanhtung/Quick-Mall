@@ -14,3 +14,9 @@ body{
 main{
     width: 100vw;
 }
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
