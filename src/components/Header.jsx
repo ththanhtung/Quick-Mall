@@ -17,7 +17,7 @@ const Header = () => {
           </button>
         </div>
         <div className="container-btn">
-          <button className='logout-btn' onClick={()=>{navigate('login')}}>
+          <button className='logout-btn' onClick={()=>{navigate('/')}}>
             <BiLogOutCircle className='icon logout-icon'title='logout'/>
           </button>
           <button className='cart-btn' onClick={()=>{navigate('cart')}}>

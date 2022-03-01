@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
+    const navigate = useNavigate();
   return (
     <form className="form-login">
         <div className="container-form-login">
@@ -18,7 +20,7 @@ const LoginForm = () => {
                 <label htmlFor="passwordId">password</label>
                 <input id='passwordId' type="password" />
             </div>
-            <button className="btn-login">login</button>
+            <button className="btn-login" onClick={()=>{navigate('products')}}>login</button>
             <div className="container-sigup-link">
                 <span>not a member?</span>
                 <Link to='../sigup'>sigup now!</Link>
