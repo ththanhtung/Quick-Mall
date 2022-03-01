@@ -45,23 +45,26 @@ header{
             }
         }
     }
-    .cart-btn{
+    .container-btn{
         display: flex;
-        align-items: center;
-        margin-right: 3.5em;
-        justify-content: center;
-        width: 4em;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background-color: transparent;
-        cursor: pointer;
-        border: none;
-        .cart-logo{
-            font-size: 2rem;
+        button{
+            display: flex;
+            align-items: center;
+            margin-right: 3.5em;
+            justify-content: center;
+            width: 4em;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;
+            border: none;
+            .icon{
+                font-size: 2rem;
+            }
         }
-    }
-    .cart-btn:hover{
-        background-color: $red_pink;
-        color: white;
+        button:hover{
+            background-color: $red_pink;
+            color: white;
+        }
     }
 }

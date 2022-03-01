@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiShoppingCart } from "react-icons/fi";
+import { BiLogOutCircle } from "react-icons/bi";
 import brandLogo from '../Assets/Images/bag.png';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,9 +16,14 @@ const Header = () => {
             <img className='brand-logo' src={brandLogo} alt="brand logo" />
           </button>
         </div>
-        <button className='cart-btn' onClick={()=>{navigate('cart')}}>
-          <FiShoppingCart className='cart-logo'title='go to cart'/>
-        </button>
+        <div className="container-btn">
+        <button className='logout-btn' onClick={()=>{navigate('login')}}>
+            <BiLogOutCircle className='icon logout-icon'title='logout'/>
+          </button>
+          <button className='cart-btn' onClick={()=>{navigate('cart')}}>
+            <FiShoppingCart className='icon cart-icon'title='go to cart'/>
+          </button>
+        </div>
       </div>
     </header>
   )
