@@ -1,8 +1,15 @@
 import React from 'react'
+import { LoginForm } from '../Components'
+import styles from '../styles/PageLayout/Login.module.scss'
+import clsx from 'clsx';
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <main>
+      <div className={clsx(styles.containerLogin)}>
+        <LoginForm/>
+      </div>
+    </main>
   )
 }
 
