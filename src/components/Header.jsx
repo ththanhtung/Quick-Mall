@@ -12,7 +12,7 @@ const Header = () => {
       <div className="header-container flex">
         <div className="branding flex">
           <h1 className="brand-name">commercial web app</h1>
-          <button className='btn-brand-name' onClick={()=>{navigate('/')}}>
+          <button className='btn-brand-name' onClick={()=>{navigate('/products')}}>
             <img className='brand-logo' src={brandLogo} alt="brand logo" />
           </button>
         </div>
