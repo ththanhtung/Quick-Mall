@@ -38,6 +38,23 @@
                 display: block;
             }
         }
+        .btn-login{
+            color: white;
+            width: 76%;
+            height: 10%;
+            border-radius: 15px;
+            border: 0;
+            font-size: 1.4rem;
+            cursor: pointer;
+            background: rgb(80,73,187);
+            background: linear-gradient(90deg, rgba(80,73,187,1) 0%, rgba(154,49,195,0.8018557764902836) 46%, rgba(0,212,255,1) 100%);
+        }
+        .btn-login:hover,
+        .btn-login:focus{
+            background: rgb(124,116,244);
+            background: linear-gradient(90deg, rgba(124,116,244,1) 21%, rgba(154,49,195,0.8018557764902836) 65%, rgba(0,212,255,1) 100%);
+            animation: zoom-in-out 1s infinite;
+        }
         .container-sigup-link{
             span{
                 margin-right: .5em;
@@ -49,5 +66,35 @@
 @supports( backdrop-filter: blur(.7rem)){
     .container-form-login{
         backdrop-filter: blur(.3rem);
+    }
+}
+
+@keyframes zoom-in-out {
+    0%{
+        font-size: 1rem;
+    }
+    12%{
+        font-size: 1.1rem;
+    }
+    25%{
+        font-size: 1.2rem;
+    }
+    37%{
+        font-size: 1.3rem;
+    }
+    50%{
+        font-size: 1.4rem;
+    }
+    62%{
+        font-size: 1.3rem;
+    }
+    75%{
+        font-size: 1.2rem;
+    }
+    87%{
+        font-size: 1.1rem;
+    }
+    100%{
+        font-size: 1rem;
     }
 }
