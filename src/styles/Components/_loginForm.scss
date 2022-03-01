@@ -4,6 +4,9 @@
 .form-login{
     width: 50%;
     height: 50%;
+    @include mobile{
+        width: 90%;
+    }
     min-height: 25rem;
     .container-form-login{
         box-shadow: $default_box_shadow;
