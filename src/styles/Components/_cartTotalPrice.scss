@@ -17,15 +17,32 @@
     .total-price-amount-product{
         overflow: hidden;
         margin-left: 2.5em;
-        width: 40%;
+        width: 70%;
         display: flex;
         justify-content: space-between;
+        @include mobile{
+            margin: 0;
+            width: 65%;
+            .total-amount-product{
+                display: none;
+            }
+        }
+        @include tablet{
+            width: 70%;
+            font-size: 1rem;
+        }
     }
     .container-checkout{
         width: 15%;
         height: 100%;
         display: flex;
         justify-content: end;
+        @include mobile{
+            width: 30%;
+        }
+        @include tablet{
+            width: 20%;
+        }
         .btn-checkout{
             margin: 0 auto;
             font-size: 1.4rem;
