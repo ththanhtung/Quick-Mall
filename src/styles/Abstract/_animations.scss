@@ -1,0 +1,29 @@
+@keyframes zoom-in-out {
+    0%{
+        font-size: 1rem;
+    }
+    12%{
+        font-size: 1.1rem;
+    }
+    25%{
+        font-size: 1.2rem;
+    }
+    37%{
+        font-size: 1.3rem;
+    }
+    50%{
+        font-size: 1.4rem;
+    }
+    62%{
+        font-size: 1.3rem;
+    }
+    75%{
+        font-size: 1.2rem;
+    }
+    87%{
+        font-size: 1.1rem;
+    }
+    100%{
+        font-size: 1rem;
+    }
+}

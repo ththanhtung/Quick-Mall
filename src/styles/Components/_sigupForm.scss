@@ -1,3 +1,79 @@
-.container-form-sigup{
-    background-color: red;
+@use '../Abstract/' as *;
+
+.form-sigup{
+    width: 50%;
+    height: 50%;
+    @include mobile{
+        width: 90%;
+    }
+    min-height: 30rem;
+    // border: 2px solid red;
+    .container-form-sigup{
+        box-shadow: $default_box_shadow;
+        background-color: white;
+        margin: 0 auto;
+        padding:0 1.5em;
+        width: 100%;
+        height: 100%;
+        @include desktop{
+            width: 50%;
+        }
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        .header-sigup{
+            .title{
+                font-size: 2.5rem;
+                text-transform: capitalize;
+            }
+            .subtitle{
+                font-size: .9rem;
+            }
+            padding-bottom: .7em;
+            border-bottom: 2px solid $grey;
+        }
+        .field{
+            text-transform: capitalize;
+            height: 11%;
+            display: flex;
+            flex-direction: column;
+            input{
+                height: 100%;
+                border: 0;
+                border-bottom: 1px solid black;
+            }
+        }
+        .field-is-admin{
+            flex-direction: row;
+            align-items: center;
+            label{
+                margin-right: 1em;
+            }
+        }
+        .container-btn-sigup{
+            // border: 2px solid red;
+            height: 8%;
+            text-align: center;
+            margin-bottom: 1em;
+            .btn-sigup{
+                color: white;
+                width: 76%;
+                height: 100%;
+                border-radius: 15px;
+                border: 0;
+                font-size: 1.4rem;
+                cursor: pointer;
+                background-color: $red_pink;
+                // background: rgb(80,73,187);
+                // background: linear-gradient(90deg, rgba(80,73,187,1) 0%, rgba(154,49,195,0.8018557764902836) 46%, rgba(0,212,255,1) 100%);
+            }
+            .btn-sigup:hover,
+            .btn-sigup:focus{
+                // background: rgb(124,116,244);
+                // background: linear-gradient(90deg, rgba(124,116,244,1) 21%, rgba(154,49,195,0.8018557764902836) 65%, rgba(0,212,255,1) 100%);
+                animation: zoom-in-out 1s infinite;
+            }
+        }
+    }
 }

@@ -12,7 +12,7 @@ const SigupForm = () => {
   return (
     <form className="form-sigup" onSubmit={handleSubmit}>
         <div className="container-form-sigup">
-            <div className="sigup-header">
+            <div className="header-sigup">
                 <h1 className='title'>sigup</h1>
                 <p className="subtitle">please fill in this form to create an account</p>
             </div>
@@ -36,7 +36,9 @@ const SigupForm = () => {
                 <label htmlFor="isAdminId">are you an admin?</label>
                 <input id='isAdminId' type="checkbox" />
             </div>
-            <button type='submit'>submit</button>
+            <div className="container-btn-sigup">    
+                <button className='btn-sigup' type='submit'>submit</button>
+            </div>
         </div>
     </form>
   )
