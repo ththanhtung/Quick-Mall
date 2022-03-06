@@ -23,6 +23,9 @@
         .name-product{
             order:2;
             text-transform: capitalize;
+            @include mobile {
+                display: none;
+            }
         }
     }
     .price-amout-cart-item{

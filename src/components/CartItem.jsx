@@ -13,12 +13,12 @@ const CartItem = () => {
             <div className="price-amout-cart-item flex">
                 <h4 className="price-product">12.000</h4>
                 <div className="amount-products flex">
-                    <button className='btn-increase'>
-                        <BsPlusLg className='icon icon-increase'/>
-                    </button>
-                    <h4 className="amount-product"> 2</h4>
                     <button className="btn-decrease">
                         <FaMinus className='icon icon-minus'/>
+                    </button>
+                    <h4 className="amount-product"> 2</h4>
+                    <button className='btn-increase'>
+                        <BsPlusLg className='icon icon-increase'/>
                     </button>
                 </div>
                 <h4 className="total-price-products">
