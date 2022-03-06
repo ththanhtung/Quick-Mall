@@ -18,19 +18,19 @@ const SigupForm = () => {
             </div>
             <div className="field field-username">
                 <label htmlFor="usernameId">username</label>
-                <input id='usernameId' type="text" />
+                <input className='input-text' id='usernameId' type="text" />
             </div>  
             <div className="field field-email">
                 <label htmlFor="emailId">email</label>
-                <input id='emailId' type="email" />
+                <input className='input-text' id='emailId' type="email" />
             </div>  
             <div className="field field-password">
                 <label htmlFor="passwordId">password</label>
-                <input id='passwordId' type="password" />
+                <input className='input-text' id='passwordId' type="password" />
             </div>
             <div className="field field-password-confirm">
                 <label htmlFor="passwordConfirmId">confirm password</label>
-                <input id='passwordConfirmId' type="password" />
+                <input className='input-text' id='passwordConfirmId' type="password" />
             </div>
             <div className="field field-is-admin">
                 <label htmlFor="isAdminId">are you an admin?</label>

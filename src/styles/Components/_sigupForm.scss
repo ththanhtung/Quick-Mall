@@ -38,7 +38,7 @@
             height: 11%;
             display: flex;
             flex-direction: column;
-            input{
+            .input-text{
                 height: 100%;
                 border: 0;
                 border-bottom: 1px solid black;
@@ -47,6 +47,7 @@
         .field-is-admin{
             flex-direction: row;
             align-items: center;
+            justify-content: space-between;
             label{
                 margin-right: 1em;
             }

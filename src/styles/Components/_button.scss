@@ -1,0 +1,32 @@
+@use '../Abstract/' as *;
+
+input[type="checkbox"]{
+    position: relative;
+    height: 20px;
+    width: 40px;
+    -webkit-appearance: none;
+    background-color: #c6c6c6;
+    outline: none;
+    box-shadow: inset 0 0 3px rgba(102, 94, 94, 0.9);
+    border-radius: 20px;
+}
+
+input:checked[type='checkbox']{
+    background-color: $green;
+}
+
+input[type='checkbox']::before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    box-shadow: $default_box_shadow;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    transition: .2s;
+}
+input:checked[type='checkbox']::before{
+    left: 20px;
+}
