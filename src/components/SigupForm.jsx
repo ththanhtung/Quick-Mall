@@ -1,0 +1,45 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
+const SigupForm = () => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        navigate('..')
+    }
+  return (
+    <form className="form-sigup" onSubmit={handleSubmit}>
+        <div className="container-form-sigup">
+            <div className="sigup-header">
+                <h1 className='title'>sigup</h1>
+                <p className="subtitle">please fill in this form to create an account</p>
+            </div>
+            <div className="field field-username">
+                <label htmlFor="usernameId">username</label>
+                <input id='usernameId' type="text" />
+            </div>  
+            <div className="field field-email">
+                <label htmlFor="emailId">email</label>
+                <input id='emailId' type="email" />
+            </div>  
+            <div className="field field-password">
+                <label htmlFor="passwordId">password</label>
+                <input id='passwordId' type="password" />
+            </div>
+            <div className="field field-password-confirm">
+                <label htmlFor="passwordConfirmId">confirm password</label>
+                <input id='passwordConfirmId' type="password" />
+            </div>
+            <div className="field field-is-admin">
+                <label htmlFor="isAdminId">are you an admin?</label>
+                <input id='isAdminId' type="checkbox" />
+            </div>
+            <button type='submit'>submit</button>
+        </div>
+    </form>
+  )
+}
+
+export default SigupForm
