@@ -10,7 +10,7 @@ const CartItem = () => {
                 <h3 className="name-product">product name</h3>
                 <img src='https://images.pexels.com/photos/4397817/pexels-photo-4397817.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' alt="" className="img-product" />
             </div>
-            <div className="price-amout-delete-cart-item flex">
+            <div className="price-amout-cart-item flex">
                 <h4 className="price-product">12.000</h4>
                 <div className="amount-products flex">
                     <button className='btn-increase'>
@@ -24,10 +24,11 @@ const CartItem = () => {
                 <h4 className="total-price-products">
                     24.000
                 </h4>
-                <button className="btn-delete">
-                    <p>delete</p>
-                </button>
+               
             </div>
+            <button className="btn-delete">
+                    <p>delete</p>
+            </button>
         </div>
     </div>
   )
