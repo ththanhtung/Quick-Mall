@@ -17,15 +17,22 @@
             color: red;
             order: 1;
         }
-        .pError{
+        .aError{
+            text-decoration: none;
             text-align: center;
             font-size: 3rem;
-            text-transform: uppercase;
+            // text-transform: uppercase;
             order: 2;
+        }
+        .aError:active{
+            color: $red_pink;
+        }
+        .aError:visited{
+            color: black;
         }
         .iconSad{
            font-size: 4rem;
-           order: -1;
+           order: 0;
         }
     }
 }
