@@ -44,4 +44,4 @@ const SigupForm = () => {
   )
 }
 
-export default SigupForm
+export default React.memo(SigupForm)

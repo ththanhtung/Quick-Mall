@@ -19,4 +19,4 @@ const cartTotalPrice = () => {
   )
 }
 
-export default cartTotalPrice
+export default React.memo(cartTotalPrice)

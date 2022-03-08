@@ -13,4 +13,4 @@ const Sigup = () => {
     )
   }
   
-  export default Sigup
+  export default React.memo(Sigup)
