@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {Home, Cart, Login, Sigup} from './Pages'
+import {Home, Cart, Login, Sigup, Error} from './Pages'
 import store from './Redux'
 
 
@@ -18,6 +18,7 @@ ReactDOM.render(
             <Route index element={<Home/>}/>
             <Route path='cart' element={<Cart/>}/>
           </Route>
+          <Route path='*' element={<Error/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>
