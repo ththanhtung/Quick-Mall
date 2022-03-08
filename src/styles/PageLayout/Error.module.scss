@@ -1,0 +1,31 @@
+@use '../Abstract/' as *;
+
+.mainContainer{
+    width: 100vw;
+    height: 100vh;
+    background-color: $dim_white;
+    display: grid;
+    place-content: center;
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .h1Error{
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 4rem;
+            color: red;
+            order: 1;
+        }
+        .pError{
+            text-align: center;
+            font-size: 3rem;
+            text-transform: uppercase;
+            order: 2;
+        }
+        .iconSad{
+           font-size: 4rem;
+           order: -1;
+        }
+    }
+}
