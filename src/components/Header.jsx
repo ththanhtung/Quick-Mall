@@ -30,8 +30,8 @@ const Header = () => {
             <button className='cart-btn' onClick={()=>{navigate('cart')}}>
               <FiShoppingCart className='icon cart-icon'title='go to cart'/>
             </button>
-            <div className="amount-container" title='product(s) in cart'>
-              <h5 className='products-amount'>0</h5>
+            <div className="amount-container" title='number of product(s) in cart'>
+              <h5 className='products-amount'>12</h5>
             </div>
           </div>
         </div>
