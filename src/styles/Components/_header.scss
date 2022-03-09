@@ -38,7 +38,7 @@ header{
             order:2;
             font-size: 1.5rem;
             font-weight: 700;
-            text-transform: uppercase;
+            text-transform: capitalize;
             @include mobile {
                 display: none;
             }
@@ -64,6 +64,21 @@ header{
         button:hover{
             background-color: $red_pink;
             color: white;
+        }
+        .container-btn2{
+            position: relative;
+            .amount-container{
+                position: absolute;
+                bottom: 0;
+                left: -.6em;
+                background-color: $hot_red;
+                width: 1.5rem;
+                height: 1.5rem;
+                border-radius: 50%;
+                display: grid;
+                place-content: center; 
+                color: white    
+            }
         }
     }
 }
