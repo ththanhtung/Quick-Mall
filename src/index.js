@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {Home, Cart, Login, Sigup, Error} from './Pages'
+import {Home, Cart, Login, Sigup, Error, ProductDetail} from './Pages'
 import store from './Store'
 
 
@@ -16,7 +16,7 @@ ReactDOM.render(
           <Route path='sigup' element={<Sigup/>}/>
           <Route path='products' element={<App/>}>
             <Route index element={<Home/>}/>
-            
+            <Route path=':productId' element={<ProductDetail/>}/>
             <Route path='cart' element={<Cart/>}/>
           </Route>
           <Route path='*' element={<Error/>}/>
