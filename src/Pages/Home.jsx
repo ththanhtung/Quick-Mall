@@ -1,9 +1,16 @@
 import React from 'react'
-import { ProductCard } from '../Components'
+import { Loading, ProductCard } from '../Components'
 import style from '../styles/PageLayout/Home.module.scss'
 import clsx from 'clsx';
 
 const Home = () => {
+
+  const loading = false;
+
+  if (loading){
+    return <Loading/>
+  }
+
   return (
     <main >
         <div className={clsx(style.container)}>

@@ -1,0 +1,10 @@
+.container-loading{
+    width: 100vw;
+    height: calc(100vh - 15vh);
+    display: grid;
+    place-content: center;
+    h1{
+        font-size: 3rem;
+        text-transform: capitalize;
+    }
+}
