@@ -13,9 +13,10 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login/>}/>
-          <Route path='/sigup' element={<Sigup/>}/>
-          <Route path='/products' element={<App/>}>
+          <Route path='sigup' element={<Sigup/>}/>
+          <Route path='products' element={<App/>}>
             <Route index element={<Home/>}/>
+            
             <Route path='cart' element={<Cart/>}/>
           </Route>
           <Route path='*' element={<Error/>}/>
