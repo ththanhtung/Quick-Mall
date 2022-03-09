@@ -1,23 +1,27 @@
 import React from 'react'
 import {BsCartPlusFill} from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
-const ProductCard = () => {
+const ProductCard = ({id, title, price, image, description}) => {
   return (
-    <div className="container-product-card">
-      <div className="center-product">
-        <div className="info-product">
-          <div className="main-info-product">
-            <h2 className="name-product">product name</h2>
-            <h3 className="price-product">$12.000</h3>
+    <div className="container-product-card" title={title}>
+      <Link to={`${id}`}>
+        <div className="center-product">
+          <div className="info-product">
+            <div className="main-info-product">
+              <h2 className="name-product">{title}</h2>
+              <h3 className="price-product">${price}</h3>
+            </div>
+            <p className="desc-product">{`${description.substring(0,61)}. . .`}</p>
           </div>
-          <p className="desc-product">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <img src={image} alt="" className="img-product" />
+          <button className='btn-add-to-cart'>
+            <BsCartPlusFill className='icon-add-to-cart'/>
+          </button>
         </div>
-        <img src='https://images.pexels.com/photos/4397817/pexels-photo-4397817.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' alt="" className="img-product" />
-        <button className='btn-add-to-cart'>
-          <BsCartPlusFill className='icon-add-to-cart'/>
-        </button>
-      </div>
+      </Link>
     </div>
+    
   )
 }
 
