@@ -30,7 +30,7 @@ const ProductDetail = () => {
     }
   }
 
-  console.log(product)
+  // console.log(product)
 
   if(loading){
     return <Loading/>
