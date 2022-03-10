@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const productSlice = createSlice({
     name: 'products',
     initialState: {
+        selectedProduct:{},
         products: []
     },
     reducers: {
@@ -21,6 +22,9 @@ const productSlice = createSlice({
         },
         removeProduct(){
 
+        },
+        setSelectedProduct(state, action){
+            state.selectedProduct = action.payload;
         }
     }
 })
