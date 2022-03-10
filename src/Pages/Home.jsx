@@ -12,7 +12,6 @@ const Home = () => {
   const [loading, setLoading] = React.useState(true);
   const products = useSelector(state => state.products.products);
  
-
   React.useEffect(()=>{getProducts()},[])
 
   const getProducts = async ()=>{
@@ -29,7 +28,7 @@ const Home = () => {
   if (loading){
     return <Loading/>
   }
-  console.log(products);
+  // console.log(products);
 
   return (
     <main >
