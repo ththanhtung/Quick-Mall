@@ -5,9 +5,9 @@ const CustomSelect = ({label, options, defaultValue}) => {
   return (
     <div className="container-custom-select">
         <h3>{label}</h3>
-        <Select options={options} defaultValue={defaultValue}/>
+        <Select className='custom-select' options={options} defaultValue={defaultValue}/>
     </div>
   )
 }
 
-export default CustomSelect
+export default React.memo(CustomSelect)
