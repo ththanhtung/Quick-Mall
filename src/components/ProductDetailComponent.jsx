@@ -23,7 +23,7 @@ const ProductDetailComponent = ({image, title, price, category, id, description}
                     <CustomSelect className='select-size' label={'size'}/>
                     <div className="field-quantity">
                         <label htmlFor="quantity-id">quantity</label>
-                        <input id='quantity-id' type="number" />
+                        <input id='quantity-id' min='0' type="number" />
                     </div>
                 </div>
                 <div className="container-button">
