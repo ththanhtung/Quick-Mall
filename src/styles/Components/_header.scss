@@ -35,13 +35,37 @@ header{
             cursor: pointer;
         }
         .brand-name{
+            font-family: 'Source Code Pro', monospace;
             order:2;
             font-size: 1.5rem;
             font-weight: 700;
             text-transform: capitalize;
+            width: max-content;
+            // outline: 1px solid red;
+            position: relative;
             @include mobile {
                 display: none;
             }
+        }
+
+        .brand-name::before,
+        .brand-name::after{
+            content: '';
+            position: absolute;
+            inset: 0 0 0 0;
+            
+        }
+
+        .brand-name::before{
+            background-color: $dim_white;
+            animation: typewriter 6s 1s steps(19) infinite;
+        }
+
+        .brand-name::after{
+            width: .125em;
+            background-color: black;
+            animation:  typewriter 6s 1s steps(19) infinite,
+                        blink .75s 1s ease infinite;
         }
     }
     .container-btn{

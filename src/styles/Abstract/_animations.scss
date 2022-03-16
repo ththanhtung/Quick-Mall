@@ -1,3 +1,5 @@
+@use './color' as *;
+
 @keyframes zoom-in-out {
     0%{
         font-size: 1rem;
@@ -25,5 +27,17 @@
     }
     100%{
         font-size: 1rem;
+    }
+}
+
+@keyframes typewriter {
+    to{
+        left: 100%;
+    }
+}
+
+@keyframes blink {
+    to{
+        background-color: transparent;
     }
 }

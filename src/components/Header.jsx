@@ -11,7 +11,7 @@ const Header = () => {
     <header className='flex'>
       <div className="header-container flex">
         <div className="branding flex">
-          <h1 className="brand-name">commercial web app</h1>
+          <h1 className="brand-name">commercial web app.</h1>
           <button 
             className='btn-brand-name' 
             onClick={()=>{navigate('/products')}}
