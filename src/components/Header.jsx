@@ -3,9 +3,14 @@ import { FiShoppingCart } from "react-icons/fi";
 import { BiLogOutCircle } from "react-icons/bi";
 import brandLogo from '../Assets/Images/bag.png';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { CartActions } from '../Store/CartSlice';
 
 const Header = () => {
   const navigate = useNavigate();
+ 
+  const totalProducts = useSelector(state => state.cart.totalProducts)
+
 
   return (
     <header className='flex'>
@@ -31,7 +36,7 @@ const Header = () => {
               <FiShoppingCart className='icon cart-icon'title='go to cart'/>
             </button>
             <div className="amount-container" title='number of product(s) in cart'>
-              <h5 className='products-amount'>12</h5>
+              <h5 className='products-amount'>{totalProducts}</h5>
             </div>
           </div>
         </div>

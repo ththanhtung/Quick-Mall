@@ -1,7 +1,20 @@
 import React from 'react'
 import CustomSelect from './CustomSelect'
+import { useDispatch } from 'react-redux'
+import {CartActions} from '../Store/CartSlice'
 
 const ProductDetailComponent = ({image, title, price, category, id, description}) => {
+    const dispatch = useDispatch();
+    const [amount, setAmount] = React.useState(1);
+
+    const handleAddToCart = ()=>{
+        dispatch(CartActions.addProduct(
+            {image, title, price, category, id, amount:+amount}
+        ))
+    }
+
+    // console.log(amount);
+
   return (
     <article className='article-product-detail'>
         <div className='container-detail-product'>
@@ -23,11 +36,21 @@ const ProductDetailComponent = ({image, title, price, category, id, description}
                     <CustomSelect className='select-size' label={'size'}/>
                     <div className="field-quantity">
                         <label htmlFor="quantity-id">quantity</label>
-                        <input id='quantity-id' min='0' type="number" />
+                        <input 
+                            id='quantity-id' 
+                            min='1' 
+                            type="number" 
+                            value={amount}
+                            onChange={
+                                (e)=>{
+                                    setAmount(e.target.value)
+                                }
+                            }
+                        />
                     </div>
                 </div>
                 <div className="container-button">
-                    <button className="btn-add-to-cart">
+                    <button className="btn-add-to-cart" onClick={handleAddToCart}>
                         add to cart
                     </button>
                 </div>

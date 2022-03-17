@@ -1,13 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-const cartTotalPrice = () => {
+const CartTotalPrice = () => {
+  const {totalProducts, totalAmount} = useSelector(state => state.cart);
+
   return (
     <div className="container-cart-total-price">
       <div className="container-center-cart-total-price">
         <div className="total-price-amount-product">
           <h4 className="title-total-price">total price:</h4>
-          <h4 className="total-price">$100.000</h4>
-          <h4 className="total-amount-product">3 selected product(s)</h4>
+          <h4 className="total-price">${totalAmount}</h4>
+          <h4 className="total-amount-product">{totalProducts} selected product(s)</h4>
         </div>
         <div className="container-checkout">
           <button className="btn-checkout">
@@ -19,4 +22,4 @@ const cartTotalPrice = () => {
   )
 }
 
-export default React.memo(cartTotalPrice)
+export default React.memo(CartTotalPrice)
