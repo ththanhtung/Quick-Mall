@@ -1,44 +1,51 @@
-import React from 'react'
-import { Loading, ProductCard } from '../Components'
-import style from '../styles/PageLayout/Home.module.scss'
-import clsx from 'clsx';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import {actions} from '../Store/ProductSlice'
+import React from "react";
+import { Loading, ProductCard } from "../Components";
+import style from "../styles/PageLayout/Home.module.scss";
+import clsx from "clsx";
+
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../Store/ProductSlice";
+import ProductRequest from "../Request/ProductRequest";
+import { toast } from "react-toastify";
 
 const Home = () => {
-
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(true);
-  const products = useSelector(state => state.products.products);
- 
-  React.useEffect(()=>{getProducts()},[])
+  const products = useSelector((state) => state.products.products);
 
-  const getProducts = async ()=>{
-    try {
-      const res = await axios.get(process.env.REACT_APP_API_GET_PRODUCTS)
-      dispatch(actions.setProducts(res.data))
-      setLoading(false)
-    } catch (error) {
-      console.error(error);
-      setLoading(false)
-    }
-  }
+  React.useEffect(() => {
+    getProducts();
+  }, []);
 
-  if (loading){
-    return <Loading/>
+  const getProducts = async () => {
+    ProductRequest.getAllProducts()
+      .then((res) => {
+        dispatch(actions.setProducts(res.data));
+        console.log(res.data);
+        // toast.success("Products loaded");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  if (loading) {
+    return <Loading />;
   }
   // console.log(products);
 
   return (
-    <main >
-        <div className={clsx(style.container)}>
-          {products.map((product)=>{
-            return <ProductCard key={product.id} {...product}/>
-          })}
-        </div>
+    <main>
+      <div className={clsx(style.container)}>
+        {products.map((product) => {
+          return <ProductCard key={product._id} {...product} />;
+        })}
+      </div>
     </main>
-  )
-}
+  );
+};
 
-export default React.memo(Home)
+export default React.memo(Home);
