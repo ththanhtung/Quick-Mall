@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosHelper = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 // TODO: config this
