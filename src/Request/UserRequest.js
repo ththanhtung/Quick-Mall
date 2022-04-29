@@ -1,10 +1,9 @@
 import AxiosHelper from "./AxiosHelper";
 
-async function getUsers() {
-  return AxiosHelper.get(`/users/`);
+class UserRequest {
+  getUsers(params){
+    const url = `/users/`;
+    return AxiosHelper.get(url, {params})
+  }
 }
-
-const UserRequest = {
-  getUsers,
-};
-export default UserRequest;
+export default new UserRequest;

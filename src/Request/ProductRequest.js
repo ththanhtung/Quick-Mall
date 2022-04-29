@@ -1,25 +1,23 @@
 import AxiosHelper from "./AxiosHelper";
 
-async function getAllProducts() {
-  return AxiosHelper.get("/products");
+class ProductRequest {
+  getAllProducts(params){
+    const url = '/products'
+    return AxiosHelper.get(url, {params})
+  }
+  getProductById(id) {
+    const url = `/products/product/${id}`;
+    return AxiosHelper.get(url)
+  }
+  updateProduct(id, data) {
+    const url = `/products/${id}`
+    return AxiosHelper.put(url, data)
+  }
+  createProduct(data) {
+    const url = '/products'
+    return AxiosHelper.post(url, data)
+  }
 }
 
-async function getProductById(id) {
-  return AxiosHelper.get(`products/product/${id}`);
-}
 
-async function updateProduct(id, data) {
-  return AxiosHelper.put(`products/${id}`, data);
-}
-
-async function createProduct(data) {
-  return AxiosHelper.post(`products/`, data);
-}
-
-const ProductRequest = {
-  getAllProducts,
-  getProductById,
-  updateProduct,
-  createProduct,
-};
-export default ProductRequest;
+export default new ProductRequest;

@@ -20,8 +20,8 @@ const Home = () => {
   const getProducts = async () => {
     ProductRequest.getAllProducts()
       .then((res) => {
-        dispatch(actions.setProducts(res.data));
-        console.log(res.data);
+        dispatch(actions.setProducts(res));
+        console.log(res);
         // toast.success("Products loaded");
       })
       .catch((err) => {

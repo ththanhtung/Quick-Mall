@@ -5,17 +5,16 @@ import AxiosHelper from "./AxiosHelper";
  * @param {*} user a user object
  * @returns a response of the request
  */
-async function registerUser(user) {
-  return AxiosHelper.post("/auth/register", user);
-}
 
-async function loginUser(user) {
-  return AxiosHelper.post("/auth/login", user);
+class AuthRequest {
+  registerUser(user){
+    const url = "/auth/register";
+    return AxiosHelper.post(url, user)
+  }
+  loginUser(user) {
+    const url = "/auth/login";
+    return AxiosHelper.post(url, user)
+  }
 }
-
-const AuthRequest = {
-  registerUser,
-  loginUser,
-};
 
 export default AuthRequest;

@@ -24,10 +24,10 @@ const ProductDetail = () => {
     ProductRequest.getProductById(productId)
       .then((res) => {
         // console.log(res.data);
-        dispatch(actions.setSelectedProduct(res.data));
+        dispatch(actions.setSelectedProduct(res));
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error(err.response.message);
       })
       .finally(() => {
         setLoading(false);
