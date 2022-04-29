@@ -17,4 +17,4 @@ class AuthRequest {
   }
 }
 
-export default AuthRequest;
+export default new AuthRequest;
