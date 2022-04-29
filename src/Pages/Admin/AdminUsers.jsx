@@ -64,7 +64,7 @@ export default function AdminUsers() {
               return (
                 // Apply the row props
                 <tr
-                  className="even:bg-gray-100 bg-opacity-60"
+                  className="even:bg-gray-100 bg-opacity-60 hover:bg-gray-100"
                   {...row.getRowProps()}
                 >
                   {

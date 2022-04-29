@@ -120,8 +120,8 @@ function AdminProducts() {
           />
         </div>
       </div>
-      <div className="m-3">
-        <div className="flex flex-row flex-wrap gap-3">
+      <div className="m-3 ">
+        <div className="flex flex-col md:flex-row flex-wrap gap-3">
           <div className="w-2/5">
             <input
               className="py-1 border border-gray-200 px-4 w-full rounded-3xl"
