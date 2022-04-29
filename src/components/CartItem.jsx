@@ -4,19 +4,19 @@ import { FaMinus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../Store/CartSlice";
 
-const CartItem = ({ img, title, price, category, id, amount }) => {
+const CartItem = ({ img, title, price, category, _id, amount }) => {
   const dispatch = useDispatch();
   const handleIncrease = () => {
-    dispatch(CartActions.increaseProduct(id));
+    dispatch(CartActions.increaseProduct(_id));
   };
 
   const handleDecrease = () => {
-    dispatch(CartActions.decreaseProduct(id));
+    dispatch(CartActions.decreaseProduct(_id));
   };
 
   const handleDelete = () => {
     // console.log('delete product function active');
-    dispatch(CartActions.deleteProduct(id));
+    dispatch(CartActions.deleteProduct(_id));
   };
 
   const totalPrice = price * amount;
