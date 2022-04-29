@@ -46,7 +46,7 @@ function AdminProducts() {
     ProductRequest.getAllProducts()
       .then((response) => {
         // console.log(response.data);
-        setListProducts(response.data);
+        setListProducts(response);
       })
       .catch((err) => {
         alert(`Error: ${err}`);
