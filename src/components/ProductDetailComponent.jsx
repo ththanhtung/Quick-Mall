@@ -8,13 +8,15 @@ const ProductDetailComponent = ({
   title,
   price,
   categories,
-  id,
+  _id,
   color,
   size,
   desc,
 }) => {
   const dispatch = useDispatch();
   const [amount, setAmount] = React.useState(1);
+
+  const [selectedColor, setSelectedColor] = React.useState(color[0]);
 
   const handleAddToCart = () => {
     dispatch(
@@ -23,13 +25,11 @@ const ProductDetailComponent = ({
         title,
         price,
         categories,
-        id,
+        _id,
         amount: +amount,
       })
     );
   };
-
-//   console.log(img);
 
   return (
     <article className="article-product-detail">
@@ -66,6 +66,11 @@ const ProductDetailComponent = ({
                 return { value: c, label: c };
               })}
               label="color"
+              defaultValue={color[0]}
+              onChange={(e) => {
+                // alert(e.value);
+                setSelectedColor(e.value);
+              }}
             />
             <CustomSelect
               className="select-size"

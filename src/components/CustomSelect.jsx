@@ -1,13 +1,18 @@
-import React from 'react'
-import Select from 'react-select'
+import React from "react";
+import Select from "react-select";
 
-const CustomSelect = ({label, options, defaultValue}) => {
+const CustomSelect = ({ label, options, defaultValue, ...children }) => {
   return (
     <div className="container-custom-select">
-        <h3>{label}</h3>
-        <Select className='custom-select' options={options} defaultValue={defaultValue}/>
+      <h3>{label}</h3>
+      <Select
+        className="custom-select"
+        options={options}
+        defaultValue={defaultValue}
+        {...children}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(CustomSelect)
+export default React.memo(CustomSelect);
