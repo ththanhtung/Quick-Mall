@@ -24,23 +24,23 @@ const LoginForm = () => {
     // console.log(username, password);
     AuthRequest.loginUser({ username, password })
       .then((response) => {
-        console.log(response);
+        console.log(response.status);
 
         // Set access token to localStorage and redux store
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("user", JSON.stringify(response.data));
-        dispatch(setAccessToken(response.data.accessToken));
-        dispatch(setUser(response.data.user));
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("user", JSON.stringify(response));
+        dispatch(setAccessToken(response.accessToken));
+        dispatch(setUser(response.user));
 
         // Then response
-        if (response.status === 200) {
+        if (response._id) {
           toast.success("Login successful");
           navigate("products");
         }
       })
       .catch((err) => {
         // console.log(err);
-        toast.error(err.response.data.message);
+        toast.error(err.response.message);
       });
   };
 
