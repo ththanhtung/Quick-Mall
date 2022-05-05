@@ -39,6 +39,9 @@ function AdminProducts() {
   const [filter, setFilter] = useState({
     sortBy: "date_new",
     search: "",
+    limit: 10,
+    startPosition: 0,
+    currentPosition: 0,
   });
 
   /**
@@ -118,6 +121,8 @@ function AdminProducts() {
         })
       );
     }
+    // Size limit
+    // setCurrentDisplaySize(filter.limit);
   }, [filter, listProducts]);
 
   return loading ? (
@@ -163,7 +168,13 @@ function AdminProducts() {
               <option>Cost [A-Z]</option>
             </select>
             <span className="text-gray-500">Display</span>
-            <select className="py-1 border border-gray-200 px-2 w-full rounded-3xl">
+            <select
+              className="py-1 border border-gray-200 px-2 w-full rounded-3xl"
+              onChange={(e) => {
+                const v = Number.parseInt(e.target.value);
+                setFilter({ ...filter, limit: v });
+              }}
+            >
               <option>10</option>
               <option>20</option>
               <option>30</option>
@@ -176,19 +187,42 @@ function AdminProducts() {
       {/* Product container wrapper */}
       <div className="flex flex-row flex-wrap">
         {filteredProducts &&
-          filteredProducts.map((product, index) => {
-            return (
-              <AdminProductItem
-                product={product}
-                key={index}
-                onClick={() => {
-                  setCurrentSelectedProduct(product);
-                  setModalVisible(true);
-                }}
-              />
-            );
-          })}
+          filteredProducts
+            .slice(filter.startPosition, filter.currentPosition + filter.limit)
+            .map((product, index) => {
+              return (
+                <AdminProductItem
+                  product={product}
+                  key={product._id}
+                  onClick={() => {
+                    setCurrentSelectedProduct(product);
+                    setModalVisible(true);
+                  }}
+                />
+              );
+            })}
       </div>
+
+      {/* Footer */}
+
+      <div className="text-center underline text-blue-500">
+        {filter.currentPosition + filter.limit > filteredProducts.length ? (
+          <></>
+        ) : (
+          <>
+            <div
+              className="p-2 cursor-pointer"
+              onClick={() => {
+                setFilter({
+                  ...filter,
+                  currentPosition: filter.currentPosition + filter.limit,
+                });
+              }}
+            ></div>
+          </>
+        )}
+      </div>
+
       <AdminProductEditModal
         visible={isModalVisible}
         product={currentSelectedProduct}
