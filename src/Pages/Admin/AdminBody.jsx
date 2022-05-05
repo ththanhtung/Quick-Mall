@@ -78,12 +78,12 @@ const AdminBodyAsideBlock = ({ title, description, link, icon }) => {
 
 function AdminBody() {
   const [settings, setSettings] = useState([
-    {
-      name: "Analytics",
-      description: "View analytics",
-      link: "/analytics",
-      icon: <MdOutlineAnalytics />,
-    },
+    // {
+    //   name: "Analytics",
+    //   description: "View analytics",
+    //   link: "/analytics",
+    //   icon: <MdOutlineAnalytics />,
+    // },
     {
       name: "Users",
       description: "Manage accounts and permissions",
@@ -102,7 +102,6 @@ function AdminBody() {
       link: "/orders",
       icon: <FaList />,
     },
-    
   ]);
 
   useEffect(() => {

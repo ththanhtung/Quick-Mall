@@ -31,8 +31,9 @@ const AdminProductItem = ({ product, ...children }) => {
 function AdminProducts() {
   const [loading, setLoading] = useState(true);
   const [listProducts, setListProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentSelectedProduct, setCurrentSelectedProduct] = useState(null);
   const [createModelVisible, setCreateModelVisible] = useState(false);
 
   const [filter, setFilter] = useState({
@@ -40,6 +41,9 @@ function AdminProducts() {
     search: "",
   });
 
+  /**
+   * Fetching all products function
+   */
   useEffect(() => {
     setLoading(true);
     // Awaiting for fetch all products
@@ -56,12 +60,15 @@ function AdminProducts() {
       });
   }, []);
 
+  /**
+   * Filter products function
+   */
   useEffect(() => {
     if (!listProducts) {
       return;
     }
     if (filter.sortBy === "date_new") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           return b.createdAt - a.createdAt;
         })
@@ -70,14 +77,14 @@ function AdminProducts() {
     if (filter.sortBy === "date") {
       // console.log(listProducts);
 
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           return b._id - a._id;
         })
       );
     }
     if (filter.sortBy === "name_a") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           if (a.title < b.title) {
             return -1;
@@ -90,7 +97,7 @@ function AdminProducts() {
       );
     }
     if (filter.sortBy === "name_d") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           if (a.title > b.title) {
             return -1;
@@ -99,6 +106,15 @@ function AdminProducts() {
             return 1;
           }
           return 0;
+        })
+      );
+    }
+    if (filter.search !== "") {
+      setFilteredProducts(
+        listProducts.filter((product) => {
+          return product.title
+            .toLowerCase()
+            .includes(filter.search.toLowerCase());
         })
       );
     }
@@ -126,6 +142,9 @@ function AdminProducts() {
             <input
               className="py-1 border border-gray-200 px-4 w-full rounded-3xl"
               placeholder="Search for"
+              onChange={(e) => {
+                setFilter({ ...filter, search: e.target.value });
+              }}
             />
           </div>
           <div className="flex flex-row gap-4 flex-1">
@@ -156,14 +175,14 @@ function AdminProducts() {
       </div>
       {/* Product container wrapper */}
       <div className="flex flex-row flex-wrap">
-        {listProducts &&
-          listProducts.map((product, index) => {
+        {filteredProducts &&
+          filteredProducts.map((product, index) => {
             return (
               <AdminProductItem
                 product={product}
                 key={index}
                 onClick={() => {
-                  setCurrentProduct(product);
+                  setCurrentSelectedProduct(product);
                   setModalVisible(true);
                 }}
               />
@@ -172,7 +191,7 @@ function AdminProducts() {
       </div>
       <AdminProductEditModal
         visible={isModalVisible}
-        product={currentProduct}
+        product={currentSelectedProduct}
         onClose={() => {
           setModalVisible(false);
         }}
