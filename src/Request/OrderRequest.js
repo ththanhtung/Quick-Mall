@@ -1,14 +1,14 @@
 import AxiosHelper from "./AxiosHelper";
 
-async function getOrders() {
-  return await AxiosHelper.get("/orders/");
+class OrderRequest {
+  getOrders(params){
+    const url = "/orders/"
+    return AxiosHelper.get(url, {params})
+  }
+  updateOrder(id, status){
+    const url = `/orders/${id}`;
+    AxiosHelper.put(url,{status})
+  }
 }
 
-async function updateOrder(id, status) {
-  return await AxiosHelper.put(`/orders/${id}`, { status });
-}
-
-export const OrderRequest = {
-  getOrders,
-  updateOrder,
-};
+export default new OrderRequest

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaCheck, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { OrderRequest } from "../../Request/OrderRequest";
+import OrderRequest from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
 
 function AdminOrderManager() {
@@ -35,7 +35,7 @@ function AdminOrderManager() {
   useEffect(() => {
     OrderRequest.getOrders().then((response) => {
       // console.log(response.data);
-      setOrders(response.data);
+      setOrders(response);
     });
   }, []);
 

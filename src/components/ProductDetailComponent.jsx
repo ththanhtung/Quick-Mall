@@ -52,8 +52,8 @@ const ProductDetailComponent = ({
                 categories:{" "}
                 <span className="info">
                   {categories &&
-                    categories.map((category) => {
-                      return <p>{category}</p>;
+                    categories.map((category, index) => {
+                      return <p key={index}>{category}</p>;
                     })}
                 </span>
               </h3>
