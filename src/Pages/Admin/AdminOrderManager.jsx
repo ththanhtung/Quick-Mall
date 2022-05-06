@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import OrderRequest from "../../Request/OrderRequest";
+import { OrderRequest } from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
 import AdminInput from "./AdminInput";
 
@@ -63,9 +63,8 @@ function AdminOrderManager() {
       filter._id
     )
       .then((response) => {
-        // console.log(response.data.orders);
-        setOrders(response.data.orders);
-        setTotalOrder(response.data.totalOrder);
+        setOrders(response.orders);
+        setTotalOrder(response.totalOrder);
       })
       .finally(() => {
         setLoading(false);
@@ -74,7 +73,7 @@ function AdminOrderManager() {
 
   useEffect(() => {
     OrderRequest.getIncomeDelivered().then((response) => {
-      setTotalDeliveredAmount(response.data.totalDeliveredIncome);
+      setTotalDeliveredAmount(response.totalDeliveredIncome);
     });
   }, []);
 

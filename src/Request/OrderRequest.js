@@ -22,5 +22,5 @@ export const OrderRequest = {
   getOrders,
   updateOrder,
   deleteOrder,
-  getIncomeDelivered
+  getIncomeDelivered,
 };
