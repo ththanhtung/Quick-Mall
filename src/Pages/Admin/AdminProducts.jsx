@@ -31,15 +31,22 @@ const AdminProductItem = ({ product, ...children }) => {
 function AdminProducts() {
   const [loading, setLoading] = useState(true);
   const [listProducts, setListProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentSelectedProduct, setCurrentSelectedProduct] = useState(null);
   const [createModelVisible, setCreateModelVisible] = useState(false);
 
   const [filter, setFilter] = useState({
     sortBy: "date_new",
     search: "",
+    limit: 10,
+    startPosition: 0,
+    currentPosition: 0,
   });
 
+  /**
+   * Fetching all products function
+   */
   useEffect(() => {
     setLoading(true);
     // Awaiting for fetch all products
@@ -56,12 +63,15 @@ function AdminProducts() {
       });
   }, []);
 
+  /**
+   * Filter products function
+   */
   useEffect(() => {
     if (!listProducts) {
       return;
     }
     if (filter.sortBy === "date_new") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           return b.createdAt - a.createdAt;
         })
@@ -70,14 +80,14 @@ function AdminProducts() {
     if (filter.sortBy === "date") {
       // console.log(listProducts);
 
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           return b._id - a._id;
         })
       );
     }
     if (filter.sortBy === "name_a") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           if (a.title < b.title) {
             return -1;
@@ -90,7 +100,7 @@ function AdminProducts() {
       );
     }
     if (filter.sortBy === "name_d") {
-      setListProducts(
+      setFilteredProducts(
         listProducts.sort((a, b) => {
           if (a.title > b.title) {
             return -1;
@@ -102,6 +112,17 @@ function AdminProducts() {
         })
       );
     }
+    if (filter.search !== "") {
+      setFilteredProducts(
+        listProducts.filter((product) => {
+          return product.title
+            .toLowerCase()
+            .includes(filter.search.toLowerCase());
+        })
+      );
+    }
+    // Size limit
+    // setCurrentDisplaySize(filter.limit);
   }, [filter, listProducts]);
 
   return loading ? (
@@ -126,6 +147,9 @@ function AdminProducts() {
             <input
               className="py-1 border border-gray-200 px-4 w-full rounded-3xl"
               placeholder="Search for"
+              onChange={(e) => {
+                setFilter({ ...filter, search: e.target.value });
+              }}
             />
           </div>
           <div className="flex flex-row gap-4 flex-1">
@@ -144,7 +168,13 @@ function AdminProducts() {
               <option>Cost [A-Z]</option>
             </select>
             <span className="text-gray-500">Display</span>
-            <select className="py-1 border border-gray-200 px-2 w-full rounded-3xl">
+            <select
+              className="py-1 border border-gray-200 px-2 w-full rounded-3xl"
+              onChange={(e) => {
+                const v = Number.parseInt(e.target.value);
+                setFilter({ ...filter, limit: v });
+              }}
+            >
               <option>10</option>
               <option>20</option>
               <option>30</option>
@@ -156,23 +186,46 @@ function AdminProducts() {
       </div>
       {/* Product container wrapper */}
       <div className="flex flex-row flex-wrap">
-        {listProducts &&
-          listProducts.map((product, index) => {
-            return (
-              <AdminProductItem
-                product={product}
-                key={index}
-                onClick={() => {
-                  setCurrentProduct(product);
-                  setModalVisible(true);
-                }}
-              />
-            );
-          })}
+        {filteredProducts &&
+          filteredProducts
+            .slice(filter.startPosition, filter.currentPosition + filter.limit)
+            .map((product, index) => {
+              return (
+                <AdminProductItem
+                  product={product}
+                  key={product._id}
+                  onClick={() => {
+                    setCurrentSelectedProduct(product);
+                    setModalVisible(true);
+                  }}
+                />
+              );
+            })}
       </div>
+
+      {/* Footer */}
+
+      <div className="text-center underline text-blue-500">
+        {filter.currentPosition + filter.limit > filteredProducts.length ? (
+          <></>
+        ) : (
+          <>
+            <div
+              className="p-2 cursor-pointer"
+              onClick={() => {
+                setFilter({
+                  ...filter,
+                  currentPosition: filter.currentPosition + filter.limit,
+                });
+              }}
+            ></div>
+          </>
+        )}
+      </div>
+
       <AdminProductEditModal
         visible={isModalVisible}
-        product={currentProduct}
+        product={currentSelectedProduct}
         onClose={() => {
           setModalVisible(false);
         }}

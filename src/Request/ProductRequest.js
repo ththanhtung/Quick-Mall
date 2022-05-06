@@ -20,4 +20,15 @@ class ProductRequest {
 }
 
 
-export default new ProductRequest;
+async function deleteProduct(id) {
+  return AxiosHelper.delete(`products/${id}`);
+}
+
+const ProductRequest = {
+  getAllProducts,
+  getProductById,
+  updateProduct,
+  createProduct,
+  deleteProduct,
+};
+export default ProductRequest;
