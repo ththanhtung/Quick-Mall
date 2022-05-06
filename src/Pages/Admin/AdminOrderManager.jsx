@@ -1,43 +1,69 @@
 import React, { useEffect, useState } from "react";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { OrderRequest } from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
 
-function AdminOrderManager() {
-  const [orders, setOrders] = useState([
-    // {
-    //   id: 6018239,
-    //   user: {
-    //     name: "John Doe",
-    //     email: "johndoe@gmail.com",
-    //   },
-    //   products: [
-    //     {
-    //       id: 1,
-    //       title: "Stick #51",
-    //       price: 102.25,
-    //       quantity: 2,
-    //     },
-    //     {
-    //       id: 1,
-    //       title: "Stick #51",
-    //       price: 102.25,
-    //       quantity: 2,
-    //     },
-    //   ],
-    //   total: 102.25 * 2,
-    //   status: "pending",
-    //   address: "123 Main St, New York, NY 10001",
-    // },
-  ]);
+function PageNavigator({ setFilter, filter, totalOrder }) {
+  const [maxPage, setMaxPage] = useState(0);
 
   useEffect(() => {
-    OrderRequest.getOrders().then((response) => {
-      console.log(response.data);
-      setOrders(response.data);
-    });
-  }, []);
+    setMaxPage(Math.ceil(totalOrder / filter.limit));
+  }, [totalOrder, filter]);
+
+  return (
+    <div className="flex flex-col justify-between w-full">
+      <div className="text-gray-500 flex flex-row gap-4">
+        <span
+          className={`cursor-pointer ${filter.page === 1 ? "opacity-50" : ""}`}
+          onClick={() => {
+            if (filter.page > 1)
+              setFilter({ ...filter, page: filter.page - 1 });
+          }}
+        >
+          <FaAngleLeft />
+        </span>
+        <span className="font-extrabold">{filter.page}</span>
+        <span
+          className={`cursor-pointer ${
+            filter.page === maxPage ? "opacity-50" : ""
+          }`}
+          onClick={() => {
+            if (filter.page < maxPage) {
+              setFilter({ ...filter, page: filter.page + 1 });
+            }
+          }}
+        >
+          <FaAngleRight />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function AdminOrderManager() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [filter, setFilter] = useState({
+    limit: 10,
+    // offset: 0,
+    page: 1,
+    status: "",
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    OrderRequest.getOrders(filter.limit, (filter.page - 1) * filter.limit)
+      .then((response) => {
+        // console.log(response.data.orders);
+        setOrders(response.data.orders);
+        setTotalOrder(response.data.totalOrder);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [filter]);
 
   const handleConfirm = (id) => {
     // If is pending,
@@ -50,7 +76,15 @@ function AdminOrderManager() {
   };
 
   const handleDelete = (id) => {
-    // todo: delete order and then update the list
+    OrderRequest.deleteOrder(id)
+      .then((response) => {
+        toast.success(response.data.message);
+        // console.log(response.data);
+        setOrders(orders.filter((order) => order._id !== id));
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const setOrderStatus = (id, status) => {
@@ -79,21 +113,33 @@ function AdminOrderManager() {
           <div className="text-gray-500 italic">Delivered</div>
           <span className="font-bold text-2xl">
             ${" "}
-            {orders.length > 0 &&
-              orders
-                .filter((order) => order.status === "delivered")
-                .reduce((a, b) => {
-                  return a + b.amount;
-                }, 0)
-                .toFixed(2)}
+            {orders.length > 0
+              ? orders
+                  .filter((order) => order.status === "delivered")
+                  .reduce((a, b) => {
+                    return a + b.amount;
+                  }, 0)
+                  .toFixed(2)
+              : Number.parseInt(0).toFixed(2)}
             {/* {orders.length > 0 && orders.reduce((a, b) => a.amount + b.amount)} */}
           </span>
         </div>
       </div>
 
+      <PageNavigator
+        filter={filter}
+        setFilter={setFilter}
+        totalOrder={totalOrder}
+      />
+
       {/* Body */}
       <div className="mx-3 my-8">
-        {orders.length > 0 &&
+        {loading ? (
+          <div className="text text-3xl text-center font-extrabold text-gray-600">
+            <div>Loading...</div>
+          </div>
+        ) : (
+          orders.length > 0 &&
           orders.map((order, index) => {
             return (
               // Wrapper
@@ -132,6 +178,7 @@ function AdminOrderManager() {
                       text={<FaTrash />}
                       level={"rounded-outline-danger"}
                       alt={`Delete order #${order._id}`}
+                      onClick={() => handleDelete(order._id)}
                     />
                     <AdminButton
                       text={<FaCheck />}
@@ -171,8 +218,16 @@ function AdminOrderManager() {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
+
+      {/* Footer */}
+      <PageNavigator
+        filter={filter}
+        setFilter={setFilter}
+        totalOrder={totalOrder}
+      />
     </div>
   );
 }
