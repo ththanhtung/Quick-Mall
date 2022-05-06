@@ -39,7 +39,10 @@ const CartSlice = createSlice({
       state.cart = tempCart;
     },
     increaseProduct(state, action) {
+        console.log('increasing');
       const tempCart = state.cart.map((item) => {
+          console.log(item._id);
+          console.log(action.payload);
         if (item._id === action.payload) {
           return {
             ...item,
@@ -48,6 +51,7 @@ const CartSlice = createSlice({
         }
         return item;
       });
+    //   console.log(tempCart);
       state.cart = tempCart;
     },
     decreaseProduct(state, action) {

@@ -19,7 +19,7 @@ export default function AdminUsers() {
 
   useEffect(() => {
     UserRequest.getUsers().then((res) => {
-      setUsers(res.data);
+      setUsers(res);
     });
   }, []);
 
@@ -61,13 +61,14 @@ export default function AdminUsers() {
         <tbody {...getTableBodyProps()}>
           {
             // Loop over the table rows
-            rows.map((row) => {
+            rows.map((row, index) => {
               // Prepare the row for display
               prepareRow(row);
               return (
                 // Apply the row props
                 <tr
                   className="even:bg-gray-100 bg-opacity-60 hover:bg-gray-100"
+                  key={index}
                   {...row.getRowProps()}
                 >
                   {
