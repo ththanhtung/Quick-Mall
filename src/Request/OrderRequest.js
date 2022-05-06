@@ -1,14 +1,26 @@
 import AxiosHelper from "./AxiosHelper";
 
-class OrderRequest {
-  getOrders(params){
-    const url = "/orders/"
-    return AxiosHelper.get(url, {params})
-  }
-  updateOrder(id, status){
-    const url = `/orders/${id}`;
-    AxiosHelper.put(url,{status})
-  }
+async function getOrders(limit, offset, _id) {
+  return await AxiosHelper.get(
+    `/orders/?limit=${limit}&offset=${offset}&${_id && `&_id=${_id}`}`
+  );
 }
 
-export default new OrderRequest
+async function updateOrder(id, status) {
+  return await AxiosHelper.put(`/orders/${id}`, { status });
+}
+
+async function deleteOrder(id) {
+  return await AxiosHelper.delete(`/orders/${id}`);
+}
+
+async function getIncomeDelivered() {
+  return await AxiosHelper.get(`/orders/income-delivered`);
+}
+
+export const OrderRequest = {
+  getOrders,
+  updateOrder,
+  deleteOrder,
+  getIncomeDelivered
+};

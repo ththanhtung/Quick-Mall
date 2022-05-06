@@ -21,7 +21,7 @@ function Admin() {
       {loading ? (
         <div>Loading...</div>
       ) : canAccess ? (
-        <div>
+        <div className="md:mx-12">
           {/* Header */}
           <div>
             <AdminNavbar />
