@@ -3,6 +3,7 @@ import { FaAngleLeft, FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { OrderRequest } from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
+import AdminInput from "./AdminInput";
 
 function PageNavigator({ setFilter, filter, totalOrder }) {
   const [maxPage, setMaxPage] = useState(0);
@@ -45,16 +46,22 @@ function AdminOrderManager() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalOrder, setTotalOrder] = useState(0);
+  const [totalDeliveredAmount, setTotalDeliveredAmount] = useState(0);
   const [filter, setFilter] = useState({
     limit: 10,
     // offset: 0,
     page: 1,
-    status: "",
+    // status: "",
+    _id: "",
   });
 
   useEffect(() => {
     setLoading(true);
-    OrderRequest.getOrders(filter.limit, (filter.page - 1) * filter.limit)
+    OrderRequest.getOrders(
+      filter.limit,
+      (filter.page - 1) * filter.limit,
+      filter._id
+    )
       .then((response) => {
         // console.log(response.data.orders);
         setOrders(response.data.orders);
@@ -65,6 +72,12 @@ function AdminOrderManager() {
       });
   }, [filter]);
 
+  useEffect(() => {
+    OrderRequest.getIncomeDelivered().then((response) => {
+      setTotalDeliveredAmount(response.data.totalDeliveredIncome);
+    });
+  }, []);
+
   const handleConfirm = (id) => {
     // If is pending,
     // then confirm
@@ -73,6 +86,11 @@ function AdminOrderManager() {
 
     const order = orders.find((order) => order._id === id);
     setOrderStatus(id, order.status === "pending" ? "confirmed" : "delivered");
+    if (order.status === "confirmed") {
+      setTotalDeliveredAmount(
+        Number.parseInt(totalDeliveredAmount) + order.amount
+      );
+    }
   };
 
   const handleDelete = (id) => {
@@ -107,22 +125,19 @@ function AdminOrderManager() {
       <div className="ml-3 mt-1 flex flex-row p-3">
         <div>
           <h1 className="text-2xl font-bold">Orders</h1>
-          <div>Search here</div>
+          <div>
+            <AdminInput
+              placeholder="Search by order ID"
+              onChange={(v) => {
+                // console.log(v);
+                setFilter({ ...filter, _id: v });
+              }}
+            />
+          </div>
         </div>
         <div className="">
           <div className="text-gray-500 italic">Delivered</div>
-          <span className="font-bold text-2xl">
-            ${" "}
-            {orders.length > 0
-              ? orders
-                  .filter((order) => order.status === "delivered")
-                  .reduce((a, b) => {
-                    return a + b.amount;
-                  }, 0)
-                  .toFixed(2)
-              : Number.parseInt(0).toFixed(2)}
-            {/* {orders.length > 0 && orders.reduce((a, b) => a.amount + b.amount)} */}
-          </span>
+          <span className="font-bold text-2xl">$ {totalDeliveredAmount}</span>
         </div>
       </div>
 

@@ -31,7 +31,10 @@ export default function AdminUsers() {
   return (
     <div>
       <div className="text-2xl font-bold mx-2 my-3">Users</div>
-      <table className="table-auto w-full" {...getTableProps()}>
+      <table
+        className="table-auto block md:table w-full overflow-auto"
+        {...getTableProps()}
+      >
         <thead>
           {
             // Loop over the header rows
