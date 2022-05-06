@@ -34,7 +34,7 @@ function AdminOrderManager() {
 
   useEffect(() => {
     OrderRequest.getOrders().then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setOrders(response.data);
     });
   }, []);
@@ -47,6 +47,10 @@ function AdminOrderManager() {
 
     const order = orders.find((order) => order._id === id);
     setOrderStatus(id, order.status === "pending" ? "confirmed" : "delivered");
+  };
+
+  const handleDelete = (id) => {
+    // todo: delete order and then update the list
   };
 
   const setOrderStatus = (id, status) => {
@@ -66,9 +70,25 @@ function AdminOrderManager() {
   return (
     <div>
       {/* Header */}
-      <div className="ml-3 mt-1">
-        <h1 className="text-2xl font-bold">Orders</h1>
-        <div>Search here</div>
+      <div className="ml-3 mt-1 flex flex-row p-3">
+        <div>
+          <h1 className="text-2xl font-bold">Orders</h1>
+          <div>Search here</div>
+        </div>
+        <div className="">
+          <div className="text-gray-500 italic">Delivered</div>
+          <span className="font-bold text-2xl">
+            ${" "}
+            {orders.length > 0 &&
+              orders
+                .filter((order) => order.status === "delivered")
+                .reduce((a, b) => {
+                  return a + b.amount;
+                }, 0)
+                .toFixed(2)}
+            {/* {orders.length > 0 && orders.reduce((a, b) => a.amount + b.amount)} */}
+          </span>
+        </div>
       </div>
 
       {/* Body */}
