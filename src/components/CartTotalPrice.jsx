@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CartTotalPrice = () => {
   const { totalProducts, totalAmount } = useSelector((state) => state.cart);
 
+  const navigate = useNavigate()
   const handleCheckout = () => {
-    alert(`Check out`);
+    navigate('../checkout')
   };
 
   return (

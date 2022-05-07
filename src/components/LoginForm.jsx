@@ -24,7 +24,7 @@ const LoginForm = () => {
     // console.log(username, password);
     AuthRequest.loginUser({ username, password })
       .then((response) => {
-        // console.log(response.status);
+        console.log(response);
 
         // Set access token to localStorage and redux store
         localStorage.setItem("accessToken", response.accessToken);

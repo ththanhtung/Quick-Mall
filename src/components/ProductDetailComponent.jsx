@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomSelect from "./CustomSelect";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../Store/CartSlice";
+import CartRequest from "../Request/CartRequest";
 
 const ProductDetailComponent = ({
   img,
@@ -13,6 +14,30 @@ const ProductDetailComponent = ({
   size,
   desc,
 }) => {
+
+  useEffect(()=>{
+    const createCart = async ()=>{
+      try {
+        const res = await CartRequest.createCart({
+      totalProducts: 0,
+      totalAmount: 0,
+      cart: []});
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    const fetchCart = async ()=>{
+      try {
+        const cart = await CartRequest.getCart('626bfc97672e22ccf5a08dae');
+        console.log(cart);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    createCart().then(fetchCart())
+    
+    
+  },[])
   const dispatch = useDispatch();
   const [amount, setAmount] = React.useState(1);
 

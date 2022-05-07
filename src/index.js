@@ -10,6 +10,7 @@ import "./index.css";
 // React toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Checkout from "./Pages/Checkout";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
           <Route path="sigup" element={<Sigup />} />
           <Route path="products" element={<App />}>
             <Route index element={<Home />} />
+            <Route path="checkout" element={<Checkout/>}/>
             <Route path=":productId" element={<ProductDetail />} />
             <Route path="cart" element={<Cart />} />
           </Route>

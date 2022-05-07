@@ -21,7 +21,7 @@ const Home = () => {
     ProductRequest.getAllProducts()
       .then((res) => {
         dispatch(actions.setProducts(res));
-        console.log(res);
+        // console.log(res);
         // toast.success("Products loaded");
       })
       .catch((err) => {
