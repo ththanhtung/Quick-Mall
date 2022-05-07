@@ -4,19 +4,31 @@ import { FaMinus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../Store/CartSlice";
 
-const CartItem = ({ img, title, price, category, _id, amount }) => {
+const CartItem = ({ img, title, price, category, _id, amount, color, size }) => {
   const dispatch = useDispatch();
   const handleIncrease = () => {
-    dispatch(CartActions.increaseProduct(_id));
+    dispatch(CartActions.increaseProduct({
+      _id,
+      color,
+      size
+    }));
   };
 
   const handleDecrease = () => {
-    dispatch(CartActions.decreaseProduct(_id));
+    dispatch(CartActions.decreaseProduct({
+      _id,
+      color,
+      size
+    }));
   };
 
   const handleDelete = () => {
     // console.log('delete product function active');
-    dispatch(CartActions.deleteProduct(_id));
+    dispatch(CartActions.deleteProduct({
+      _id,
+      color,
+      size
+    }));
   };
 
   const totalPrice = price * amount;
@@ -26,6 +38,8 @@ const CartItem = ({ img, title, price, category, _id, amount }) => {
       <div className="container-center-cart-item flex">
         <div className="info-product flex">
           <h3 className="name-product">{title}</h3>
+          <p>{color}</p>
+          <p>{size}</p>
           <img src={img} alt="" className="img-product" />
         </div>
         <div className="price-amout-cart-item flex">

@@ -27,9 +27,15 @@ const CartSlice = createSlice({
 
       // If the product is already in the cart, increase the amount
       const tempCart = state.cart.map((item) => {
-        if (item._id === action.payload._id) {
+        if (
+          item._id === action.payload._id &&
+          item.color === action.payload.color &&
+          item.size === action.payload.size
+        ) {
           return {
             ...item,
+            color: action.payload.color,
+            size: action.payload.size,
             amount: item.amount + action.payload.amount,
           };
         }
@@ -39,11 +45,15 @@ const CartSlice = createSlice({
       state.cart = tempCart;
     },
     increaseProduct(state, action) {
-        console.log('increasing');
+      console.log("increasing");
       const tempCart = state.cart.map((item) => {
-          console.log(item._id);
-          console.log(action.payload);
-        if (item._id === action.payload) {
+        // console.log(item._id);
+        // console.log(action.payload);
+        if (
+          item._id === action.payload._id &&
+          item.color === action.payload.color &&
+          item.size === action.payload.size
+        ) {
           return {
             ...item,
             amount: item.amount + 1,
@@ -51,13 +61,17 @@ const CartSlice = createSlice({
         }
         return item;
       });
-    //   console.log(tempCart);
+      //   console.log(tempCart);
       state.cart = tempCart;
     },
     decreaseProduct(state, action) {
       const tempCart = state.cart
         .map((item) => {
-          if (item._id === action.payload) {
+          if (
+            item._id === action.payload._id &&
+            item.color === action.payload.color &&
+            item.size === action.payload.size
+          ) {
             return {
               ...item,
               amount: item.amount - 1,
@@ -69,7 +83,16 @@ const CartSlice = createSlice({
       state.cart = tempCart;
     },
     deleteProduct(state, action) {
-      const tempCart = state.cart.filter((item) => item._id !== action.payload);
+      const compareProduct = (product) => {
+        const isDifferent =
+          product._id !== action.payload._id &&
+          product.color !== action.payload.color &&
+          product.size !== action.payload.size;
+
+          console.log(isDifferent);
+        return isDifferent;
+      };
+      const tempCart = state.cart.filter(compareProduct);
       state.cart = tempCart;
     },
     getTotal(state) {

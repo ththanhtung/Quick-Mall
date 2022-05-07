@@ -16,19 +16,24 @@ const ProductDetailComponent = ({
   const dispatch = useDispatch();
   const [amount, setAmount] = React.useState(1);
 
-  const [selectedColor, setSelectedColor] = React.useState(color[0]);
+  const [selectedColor, setSelectedColor] = React.useState();
+  const [selectedSize, setSize] = React.useState();
 
   const handleAddToCart = () => {
-    dispatch(
-      CartActions.addProduct({
-        img,
-        title,
-        price,
-        categories,
-        _id,
-        amount: +amount,
-      })
-    );
+    if (selectedColor && selectedSize){
+      dispatch(
+        CartActions.addProduct({
+          img,
+          title,
+          price,
+          categories,
+          color:selectedColor,
+          size: selectedSize,
+          _id,
+          amount: +amount,
+        })
+      );
+    }
   };
 
   return (
@@ -78,6 +83,11 @@ const ProductDetailComponent = ({
                 return { value: s, label: s };
               })}
               label={"size"}
+              defaultValue={size[0]}
+              onChange={(e) => {
+                // alert(e.value);
+                setSize(e.value);
+              }}
             />
             <div className="field-quantity">
               <label htmlFor="quantity-id">quantity</label>
