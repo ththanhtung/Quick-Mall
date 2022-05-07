@@ -85,11 +85,10 @@ const CartSlice = createSlice({
     deleteProduct(state, action) {
       const compareProduct = (product) => {
         const isDifferent =
-          product._id !== action.payload._id &&
-          product.color !== action.payload.color &&
-          product.size !== action.payload.size;
-
-          console.log(isDifferent);
+          product._id !== action.payload._id ||
+          product.size !== action.payload.size ||
+          product.color !== action.payload.color;
+        console.log("is different: ", isDifferent);
         return isDifferent;
       };
       const tempCart = state.cart.filter(compareProduct);
