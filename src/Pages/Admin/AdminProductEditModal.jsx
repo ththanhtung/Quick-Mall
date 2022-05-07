@@ -144,6 +144,20 @@ const AdminProductEditModal = ({ product, visible, onClose, onUpdateView }) => {
       });
   };
 
+  const onDelete = () => {
+    ProductRequest.deleteProduct(product._id)
+      .then(() => {
+        toast.success(`Successfully delete the product`);
+      })
+      .catch(() => {
+        toast.error(`Failed to delete the product`);
+      })
+      .finally(() => {
+        // Then close the dialog
+        onClose();
+      });
+  };
+
   return (
     <div
       className={`fixed w-full h-full bg-black top-0 left-0 bg-opacity-70 ${
@@ -358,7 +372,9 @@ const AdminProductEditModal = ({ product, visible, onClose, onUpdateView }) => {
           <AdminButton text={`save`} level={`primary`} onClick={onSave} />
           <AdminButton text={`cancel`} level={`danger`} onClick={onClose} />
 
-          <div className="flex-1"></div>
+          <div className="flex-1">
+            <AdminButton text={`delete`} level={`danger`} onClick={onDelete} />
+          </div>
         </div>
       </div>
     </div>

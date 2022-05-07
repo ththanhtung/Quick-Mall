@@ -1,41 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import OrderRequest from "../../Request/OrderRequest";
+import { OrderRequest } from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
+import AdminInput from "./AdminInput";
 
-function AdminOrderManager() {
-  const [orders, setOrders] = useState([
-    // {
-    //   id: 6018239,
-    //   user: {
-    //     name: "John Doe",
-    //     email: "johndoe@gmail.com",
-    //   },
-    //   products: [
-    //     {
-    //       id: 1,
-    //       title: "Stick #51",
-    //       price: 102.25,
-    //       quantity: 2,
-    //     },
-    //     {
-    //       id: 1,
-    //       title: "Stick #51",
-    //       price: 102.25,
-    //       quantity: 2,
-    //     },
-    //   ],
-    //   total: 102.25 * 2,
-    //   status: "pending",
-    //   address: "123 Main St, New York, NY 10001",
-    // },
-  ]);
+function PageNavigator({ setFilter, filter, totalOrder }) {
+  const [maxPage, setMaxPage] = useState(0);
 
   useEffect(() => {
-    OrderRequest.getOrders().then((response) => {
-      // console.log(response.data);
-      setOrders(response);
+    setMaxPage(Math.ceil(totalOrder / filter.limit));
+  }, [totalOrder, filter]);
+
+  return (
+    <div className="flex flex-col justify-between w-full">
+      <div className="text-gray-500 flex flex-row gap-4">
+        <span
+          className={`cursor-pointer ${filter.page === 1 ? "opacity-50" : ""}`}
+          onClick={() => {
+            if (filter.page > 1)
+              setFilter({ ...filter, page: filter.page - 1 });
+          }}
+        >
+          <FaAngleLeft />
+        </span>
+        <span className="font-extrabold">{filter.page}</span>
+        <span
+          className={`cursor-pointer ${
+            filter.page === maxPage ? "opacity-50" : ""
+          }`}
+          onClick={() => {
+            if (filter.page < maxPage) {
+              setFilter({ ...filter, page: filter.page + 1 });
+            }
+          }}
+        >
+          <FaAngleRight />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function AdminOrderManager() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [totalDeliveredAmount, setTotalDeliveredAmount] = useState(0);
+  const [filter, setFilter] = useState({
+    limit: 10,
+    // offset: 0,
+    page: 1,
+    // status: "",
+    _id: "",
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    OrderRequest.getOrders(
+      filter.limit,
+      (filter.page - 1) * filter.limit,
+      filter._id
+    )
+      .then((response) => {
+        setOrders(response.orders);
+        setTotalOrder(response.totalOrder);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [filter]);
+
+  useEffect(() => {
+    OrderRequest.getIncomeDelivered().then((response) => {
+      setTotalDeliveredAmount(response.totalDeliveredIncome);
     });
   }, []);
 
@@ -47,6 +85,23 @@ function AdminOrderManager() {
 
     const order = orders.find((order) => order._id === id);
     setOrderStatus(id, order.status === "pending" ? "confirmed" : "delivered");
+    if (order.status === "confirmed") {
+      setTotalDeliveredAmount(
+        Number.parseInt(totalDeliveredAmount) + order.amount
+      );
+    }
+  };
+
+  const handleDelete = (id) => {
+    OrderRequest.deleteOrder(id)
+      .then((response) => {
+        toast.success(response.data.message);
+        // console.log(response.data);
+        setOrders(orders.filter((order) => order._id !== id));
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const setOrderStatus = (id, status) => {
@@ -66,14 +121,39 @@ function AdminOrderManager() {
   return (
     <div>
       {/* Header */}
-      <div className="ml-3 mt-1">
-        <h1 className="text-2xl font-bold">Orders</h1>
-        <div>Search here</div>
+      <div className="ml-3 mt-1 flex flex-row p-3">
+        <div>
+          <h1 className="text-2xl font-bold">Orders</h1>
+          <div>
+            <AdminInput
+              placeholder="Search by order ID"
+              onChange={(v) => {
+                // console.log(v);
+                setFilter({ ...filter, _id: v });
+              }}
+            />
+          </div>
+        </div>
+        <div className="">
+          <div className="text-gray-500 italic">Delivered</div>
+          <span className="font-bold text-2xl">$ {totalDeliveredAmount}</span>
+        </div>
       </div>
+
+      <PageNavigator
+        filter={filter}
+        setFilter={setFilter}
+        totalOrder={totalOrder}
+      />
 
       {/* Body */}
       <div className="mx-3 my-8">
-        {orders.length > 0 &&
+        {loading ? (
+          <div className="text text-3xl text-center font-extrabold text-gray-600">
+            <div>Loading...</div>
+          </div>
+        ) : (
+          orders.length > 0 &&
           orders.map((order, index) => {
             return (
               // Wrapper
@@ -112,6 +192,7 @@ function AdminOrderManager() {
                       text={<FaTrash />}
                       level={"rounded-outline-danger"}
                       alt={`Delete order #${order._id}`}
+                      onClick={() => handleDelete(order._id)}
                     />
                     <AdminButton
                       text={<FaCheck />}
@@ -151,8 +232,16 @@ function AdminOrderManager() {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
+
+      {/* Footer */}
+      <PageNavigator
+        filter={filter}
+        setFilter={setFilter}
+        totalOrder={totalOrder}
+      />
     </div>
   );
 }
