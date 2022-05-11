@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FaAngleLeft, FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
+import {
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaAngleLeft,
+  FaAngleRight,
+  FaCheck,
+  FaTrash,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 import { OrderRequest } from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
@@ -15,20 +22,57 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
   return (
     <div className="flex flex-col justify-between w-full">
       <div className="text-gray-500 flex flex-row gap-4">
-        <span
-          className={`cursor-pointer ${filter.page === 1 ? "opacity-50" : ""}`}
+        <button
+          className={`cursor-pointer ${
+            filter.page === 1 ? "opacity-50" : ""
+          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          onClick={() => {
+            if (filter.page > 1) setFilter({ ...filter, page: 1 });
+          }}
+        >
+          <FaAngleDoubleLeft />
+        </button>
+        <button
+          className={`cursor-pointer ${
+            filter.page === 1 ? "opacity-50" : ""
+          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page > 1)
               setFilter({ ...filter, page: filter.page - 1 });
           }}
         >
           <FaAngleLeft />
-        </span>
-        <span className="font-extrabold">{filter.page}</span>
-        <span
+        </button>
+        {/* <span className="font-extrabold cursor-default">{filter.page}</span> */}
+        <div className="overflow-x-scroll block whitespace-nowrap">
+          {Array(maxPage)
+            .fill(0)
+            // limit 6 items from - page to page
+
+            // take limit of 6 from current page
+            .map((_, index) => {
+              if (index < filter.page - 3 || index > filter.page + 3)
+                return null;
+              return (
+                <button
+                  key={index}
+                  className={`cursor-pointer ${
+                    filter.page === index + 1 ? "opacity-50 font-extrabold" : ""
+                  } transition-all ease-linear hover:bg-gray-300 rounded-3xl p-2`}
+                  onClick={() => {
+                    if (filter.page !== index + 1)
+                      setFilter({ ...filter, page: index + 1 });
+                  }}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
+        </div>
+        <button
           className={`cursor-pointer ${
             filter.page === maxPage ? "opacity-50" : ""
-          }`}
+          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page < maxPage) {
               setFilter({ ...filter, page: filter.page + 1 });
@@ -36,7 +80,19 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
           }}
         >
           <FaAngleRight />
-        </span>
+        </button>
+        <button
+          className={`cursor-pointer ${
+            filter.page === maxPage ? "opacity-50" : ""
+          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          onClick={() => {
+            if (filter.page < maxPage) {
+              setFilter({ ...filter, page: maxPage });
+            }
+          }}
+        >
+          <FaAngleDoubleRight />
+        </button>
       </div>
     </div>
   );
@@ -95,7 +151,7 @@ function AdminOrderManager() {
   const handleDelete = (id) => {
     OrderRequest.deleteOrder(id)
       .then((response) => {
-        toast.success(response.data.message);
+        toast.success(response);
         // console.log(response.data);
         setOrders(orders.filter((order) => order._id !== id));
       })
@@ -121,7 +177,10 @@ function AdminOrderManager() {
   return (
     <div>
       {/* Header */}
-      <div className="ml-3 mt-1 flex flex-row p-3">
+      <div
+        className="ml-3 mt-1 flex flex-col md:flex-row p-3 justify-start 
+          md:justify-start md:items-stretch items-start gap-5 md:gap-8"
+      >
         <div>
           <h1 className="text-2xl font-bold">Orders</h1>
           <div>
@@ -212,7 +271,7 @@ function AdminOrderManager() {
                         <div key={_index} className="mb-2 w-full">
                           <div className="flex flex-row">
                             <span className="text-gray-500">
-                              {product.productId.title}
+                              {product.productId && product.productId.title}
                             </span>
                             <span className="font-bold text-zinc-900">
                               x {product.quantity}
@@ -222,9 +281,10 @@ function AdminOrderManager() {
                           <div></div>
                           <div>
                             ${" "}
-                            {(
-                              product.productId.price * product.quantity
-                            ).toFixed(2)}
+                            {product.productId &&
+                              (
+                                product.productId.price * product.quantity
+                              ).toFixed(2)}
                           </div>
                         </div>
                       );
