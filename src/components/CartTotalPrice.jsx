@@ -8,6 +8,7 @@ const CartTotalPrice = () => {
   const navigate = useNavigate()
   const handleCheckout = () => {
     navigate('../checkout')
+    
   };
 
   return (

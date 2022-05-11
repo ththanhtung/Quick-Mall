@@ -8,7 +8,7 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { OrderRequest } from "../../Request/OrderRequest";
+import  OrderRequest  from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
 import AdminInput from "./AdminInput";
 
