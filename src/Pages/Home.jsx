@@ -7,11 +7,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../Store/ProductSlice";
 import ProductRequest from "../Request/ProductRequest";
 import { toast } from "react-toastify";
+import useCart from "../Hooks/useCart";
+import useAuth from "../Hooks/useAuth";
 
 const Home = () => {
-  const dispatch = useDispatch();
+  useCart()
+  const dispatch = useDispatch()
   const [loading, setLoading] = React.useState(true);
   const products = useSelector((state) => state.products.products);
+
+  const {user} = useAuth();
+  console.log(user);
 
   React.useEffect(() => {
     getProducts();

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../Store/ProductSlice";
 import ProductRequest from "../Request/ProductRequest";
 import { toast } from "react-toastify";
+import useCart from "../Hooks/useCart";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -14,6 +15,7 @@ const ProductDetail = () => {
 
   const [loading, setLoading] = React.useState(true);
 
+  useCart()
   React.useEffect(() => {
     fetchProduct();
   }, []);

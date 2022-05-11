@@ -1,18 +1,31 @@
 import AxiosHelper from "./AxiosHelper";
 
 class CartRequest {
-  createCart(newCart) {
+  createCart(userId) {
     const defaultCart = {
-      totalProducts: 0,
-      totalAmount: 0,
-      cart: [],
+      userId,
+      products: [],
     };
     const url = `/carts`;
-    AxiosHelper.get(url, {...defaultCart,...newCart});
+    AxiosHelper.post(url, defaultCart);
   }
   getCart(userId) {
     const url = `/carts/find/${userId}`;
-    AxiosHelper.get(url);
+    return AxiosHelper.get(url);
+  }
+  updateCart(cartId, products) {
+    const defaultCart = {
+      _id: "",
+      products: [],
+      
+    };
+    console.log(products);
+    const url = `/carts/${cartId}`;
+    return AxiosHelper.put(url, {
+      ...defaultCart,
+      _id: cartId,
+      products,
+    });
   }
 }
 

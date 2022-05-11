@@ -1,63 +1,47 @@
 import React, { useEffect } from "react";
 import CustomSelect from "./CustomSelect";
-import { useDispatch } from "react-redux";
-import { CartActions } from "../Store/CartSlice";
-import CartRequest from "../Request/CartRequest";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CartActions,
+  getCartId,
+  getCurrentProductsInCart,
+  updateCart,
+} from "../Store/CartSlice";
 
 const ProductDetailComponent = ({
-  img,
-  title,
-  price,
-  categories,
-  _id,
-  color,
-  size,
-  desc,
+  img = "",
+  title = "",
+  price = 0,
+  categories = [],
+  _id = "",
+  color = "",
+  size = "",
+  desc = "",
 }) => {
-
-  useEffect(()=>{
-    const createCart = async ()=>{
-      try {
-        const res = await CartRequest.createCart({
-      totalProducts: 0,
-      totalAmount: 0,
-      cart: []});
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    const fetchCart = async ()=>{
-      try {
-        const cart = await CartRequest.getCart('626bfc97672e22ccf5a08dae');
-        console.log(cart);
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    createCart().then(fetchCart())
-    
-    
-  },[])
+  const currentProductsInCart = useSelector(getCurrentProductsInCart);
+  const cartId = useSelector(getCartId);
   const dispatch = useDispatch();
   const [amount, setAmount] = React.useState(1);
 
   const [selectedColor, setSelectedColor] = React.useState();
   const [selectedSize, setSize] = React.useState();
 
-  const handleAddToCart = () => {
-    if (selectedColor && selectedSize){
+  const handleAddToCart = async () => {
+    if (selectedColor && selectedSize) {
+      // dispatch(updateCart(cartId,currentProductsInCart))
       dispatch(
         CartActions.addProduct({
           img,
           title,
           price,
           categories,
-          color:selectedColor,
+          color: selectedColor,
           size: selectedSize,
           _id,
           amount: +amount,
+          quantity: +amount,
         })
-      );
+      )
     }
   };
 

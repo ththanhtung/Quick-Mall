@@ -1,8 +1,58 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import useAuth from "../Hooks/useAuth";
+import CartRequest from "../Request/CartRequest";
+
+export const fetchCart = createAsyncThunk("cart/fetchCart", async (userId) => {
+  try {
+    // console.log('user id:',userId);
+    const res = await CartRequest.getCart(userId);
+    console.log(res[0]);
+
+    return res[0];
+  } catch (error) {
+    console.error(error)
+  }
+});
+
+export const updateCart = createAsyncThunk(
+  "cart/updateCart",
+  async (updatedCart) => {
+    try {
+      const { cartId, currentProductsInCart } = updatedCart;
+      console.log(cartId, currentProductsInCart);
+      const res = await CartRequest.updateCart(cartId, currentProductsInCart);
+      console.log(res);
+      return res;
+    } catch (error) {
+     console.error(error);
+    }
+  }
+);
+
+const normalizeData = (product) => {
+  const defaultProduct = {
+    _id: "",
+    color: "",
+    size: "",
+    amount: 1,
+    img: "https://dummyimage.com/300x200/000/fff",
+    price: 0,
+    category: [],
+    title: "default title",
+  };
+  return {
+    ...defaultProduct,
+    ...product,
+    _id: product._id,
+    amount: product.quantity,
+  };
+};
 
 const CartSlice = createSlice({
   name: "cart",
   initialState: {
+    _id: "",
     totalProducts: 0,
     totalAmount: 0,
     cart: [],
@@ -37,6 +87,7 @@ const CartSlice = createSlice({
             color: action.payload.color,
             size: action.payload.size,
             amount: item.amount + action.payload.amount,
+            quantity: item.amount + action.payload.amount
           };
         }
         return item;
@@ -57,6 +108,7 @@ const CartSlice = createSlice({
           return {
             ...item,
             amount: item.amount + 1,
+            quantity: item.amount + 1,
           };
         }
         return item;
@@ -75,6 +127,7 @@ const CartSlice = createSlice({
             return {
               ...item,
               amount: item.amount - 1,
+              quantity: item.amount - 1,
             };
           }
           return item;
@@ -110,12 +163,28 @@ const CartSlice = createSlice({
       );
 
       totalAmount = +parseFloat(totalAmount).toFixed(2);
-      console.log(totalAmount);
+      // console.log(totalAmount);
       state.totalAmount = totalAmount;
       state.totalProducts = totalProducts;
     },
   },
+  extraReducers: {
+    [fetchCart.fulfilled]: (state, action) => {
+      const loadedProducts = action.payload.products.map(normalizeData);
+      // console.log(action.payload._id);
+      // console.log(loadedProducts);
+      state.cart = loadedProducts;
+      state._id = action.payload._id;
+    },
+    [updateCart.fulfilled]: (state, action) => {
+      //  const loadedProducts = action.payload.products.map(normalizeData);
+       // console.log(loadedProducts);
+      //  state.cart = loadedProducts;
+    },
+  },
 });
 
+export const getCurrentProductsInCart = state => state.cart.cart;
+export const getCartId = state => state.cart._id;
 export const CartActions = CartSlice.actions;
 export default CartSlice;
