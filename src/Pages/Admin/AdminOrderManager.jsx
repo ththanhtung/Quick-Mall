@@ -141,6 +141,9 @@ function AdminOrderManager() {
 
     const order = orders.find((order) => order._id === id);
     setOrderStatus(id, order.status === "pending" ? "confirmed" : "delivered");
+    if (order.status !== "delivered") {
+      toast.success("Order status updated");
+    }
     if (order.status === "confirmed") {
       setTotalDeliveredAmount(
         Number.parseInt(totalDeliveredAmount) + order.amount
@@ -162,7 +165,8 @@ function AdminOrderManager() {
 
   const setOrderStatus = (id, status) => {
     OrderRequest.updateOrder(id, status).then((_response) => {
-      toast.success("Order status updated");
+      // console.log(_response);
+      // toast.success("Order status updated");
       setOrders(
         orders.map((order) => {
           if (order._id === id) {
@@ -258,6 +262,7 @@ function AdminOrderManager() {
                       level={"rounded-outline-success"}
                       alt={"Confirm order"}
                       onClick={() => handleConfirm(order._id)}
+                      disabled={order.status === "delivered"}
                     />
                   </div>
                 </div>
