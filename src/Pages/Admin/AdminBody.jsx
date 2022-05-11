@@ -57,7 +57,7 @@ const AdminBodyContainerWrapper = ({ children }) => {
           {SETTINGS.map((nav, _index) => {
             return (
               <div
-                className="px-8 py-4 md:p-8 w-full bg-gradient-to-tl from-red-500 to-indigo-400 rounded-3xl flex-1 
+                className="px-8 py-4 md:p-8 w-full bg-gradient-to-tl from-red-500 to-indigo-400 rounded-3xl  
                   cursor-pointer hover:scale-105 transition ease-in-out flex flex-row gap-4"
                 key={_index}
                 onClick={() => {
