@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import useAuth from "../Hooks/useAuth";
 import CartRequest from "../Request/CartRequest";
 
 export const fetchCart = createAsyncThunk("cart/fetchCart", async (userId) => {
@@ -8,7 +6,6 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async (userId) => {
     // console.log('user id:',userId);
     const res = await CartRequest.getCart(userId);
     console.log(res[0]);
-
     return res[0];
   } catch (error) {
     console.error(error)
