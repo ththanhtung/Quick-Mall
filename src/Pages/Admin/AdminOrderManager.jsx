@@ -8,7 +8,7 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import  OrderRequest  from "../../Request/OrderRequest";
+import OrderRequest from "../../Request/OrderRequest";
 import AdminButton from "./AdminButton";
 import AdminInput from "./AdminInput";
 
@@ -23,9 +23,8 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
     <div className="flex flex-col justify-between w-full">
       <div className="text-gray-500 flex flex-row gap-4">
         <button
-          className={`cursor-pointer ${
-            filter.page === 1 ? "opacity-50" : ""
-          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          className={`cursor-pointer ${filter.page === 1 ? "opacity-50" : ""
+            } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page > 1) setFilter({ ...filter, page: 1 });
           }}
@@ -33,9 +32,8 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
           <FaAngleDoubleLeft />
         </button>
         <button
-          className={`cursor-pointer ${
-            filter.page === 1 ? "opacity-50" : ""
-          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          className={`cursor-pointer ${filter.page === 1 ? "opacity-50" : ""
+            } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page > 1)
               setFilter({ ...filter, page: filter.page - 1 });
@@ -56,9 +54,8 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
               return (
                 <button
                   key={index}
-                  className={`cursor-pointer ${
-                    filter.page === index + 1 ? "opacity-50 font-extrabold" : ""
-                  } transition-all ease-linear hover:bg-gray-300 rounded-3xl p-2`}
+                  className={`cursor-pointer ${filter.page === index + 1 ? "opacity-50 font-extrabold" : ""
+                    } transition-all ease-linear hover:bg-gray-300 rounded-3xl p-2`}
                   onClick={() => {
                     if (filter.page !== index + 1)
                       setFilter({ ...filter, page: index + 1 });
@@ -70,9 +67,8 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
             })}
         </div>
         <button
-          className={`cursor-pointer ${
-            filter.page === maxPage ? "opacity-50" : ""
-          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          className={`cursor-pointer ${filter.page === maxPage ? "opacity-50" : ""
+            } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page < maxPage) {
               setFilter({ ...filter, page: filter.page + 1 });
@@ -82,9 +78,8 @@ function PageNavigator({ setFilter, filter, totalOrder }) {
           <FaAngleRight />
         </button>
         <button
-          className={`cursor-pointer ${
-            filter.page === maxPage ? "opacity-50" : ""
-          } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
+          className={`cursor-pointer ${filter.page === maxPage ? "opacity-50" : ""
+            } transition-all ease-linear hover:bg-gray-300 p-2 rounded-3xl`}
           onClick={() => {
             if (filter.page < maxPage) {
               setFilter({ ...filter, page: maxPage });
@@ -232,7 +227,9 @@ function AdminOrderManager() {
                       {order.userId.username}
                     </div>
                     <div>{order.userId.email}</div>
-                    <div>{order.address}</div>
+                    <div>{typeof (order.address) === 'string' ? order.address : <>{
+                      order.address["Stress address"]
+                    }, {order.address["City"]}, {order.address["State"]}</>}</div>
                     <div>{order.phone}</div>
                   </div>
                   {/* Status */}
