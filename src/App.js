@@ -14,7 +14,7 @@ import "./styles/style.scss";
 function App() {
   const currentProductsInCart = useSelector(getCurrentProductsInCart);
   const cartId = useSelector(getCartId);
-  console.log(currentProductsInCart);
+  // console.log(currentProductsInCart);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);

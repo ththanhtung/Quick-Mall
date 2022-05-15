@@ -10,7 +10,7 @@ const Cart = () => {
 
   const cartItems = useSelector(state=>state.cart.cart)
 
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <main>
         <div className={clsx(styles.containerCartItems)}>

@@ -20,7 +20,7 @@ const Home = () => {
   const [viewProducts, setViewProducts] = useState([]);
 
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     ProductRequest.getAllProducts()

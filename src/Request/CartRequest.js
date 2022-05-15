@@ -19,7 +19,7 @@ class CartRequest {
       products: [],
       
     };
-    console.log(products);
+    // console.log(products);
     const url = `/carts/${cartId}`;
     return AxiosHelper.put(url, {
       ...defaultCart,

@@ -58,13 +58,13 @@ header{
 
         .brand-name::before{
             background-color: $dim_white;
-            animation: typewriter 6s 1s steps(19) infinite;
+            animation: typewriter 6s 1s steps(11) infinite;
         }
 
         .brand-name::after{
             width: .125em;
             background-color: black;
-            animation:  typewriter 6s 1s steps(19) infinite,
+            animation:  typewriter 6s 1s steps(11) infinite,
                         blink .75s 1s ease infinite;
         }
     }

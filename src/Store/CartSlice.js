@@ -5,7 +5,7 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async (userId) => {
   try {
     // console.log('user id:',userId);
     const res = await CartRequest.getCart(userId);
-    console.log(res[0]);
+    // console.log(res[0]);
     return res[0];
   } catch (error) {
     console.error(error)
@@ -17,9 +17,9 @@ export const updateCart = createAsyncThunk(
   async (updatedCart) => {
     try {
       const { cartId, currentProductsInCart } = updatedCart;
-      console.log(cartId, currentProductsInCart);
+      // console.log(cartId, currentProductsInCart);
       const res = await CartRequest.updateCart(cartId, currentProductsInCart);
-      console.log(res);
+      // console.log(res);
       return res;
     } catch (error) {
      console.error(error);

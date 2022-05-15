@@ -3,8 +3,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { BiLogOutCircle } from "react-icons/bi";
 import brandLogo from '../Assets/Images/bag.png';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { CartActions } from '../Store/CartSlice';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Header = () => {
     <header className='flex'>
       <div className="header-container flex">
         <div className="branding flex">
-          <h1 className="brand-name">commercial web app.</h1>
+          <h1 className="brand-name">Quick Mall.</h1>
           <button 
             className='btn-brand-name' 
             onClick={()=>{navigate('/products')}}
