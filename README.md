@@ -88,7 +88,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### Use-cases Diagram
 
-![Ten anh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/282758337_599843601208234_1411558220165391193_n.png?_nc_cat=102&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ZgvzcmaWaaMAX-F03dq&tn=g8kKPy0vG35jwiCA&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVJD0OLTxk0TXVjyBJnMNW85JvsSrVdGNMNQ5kH2jrfG9w&oe=62C41AE9)
+![Ten anh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/283837172_761968178304265_2360867031351844969_n.png?_nc_cat=101&ccb=1-7&_nc_sid=ae9488&_nc_ohc=AuwMRJ2sTsQAX-D12al&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVJQbgaxazwnGSKatGzAoc2k8i3Tm1uV84sReafa98ryXw&oe=62C43A8F)
 
 ### Sequence Diagram
 
