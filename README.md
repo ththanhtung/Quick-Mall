@@ -72,6 +72,15 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 - ### Nodejs
 
 - ### MongoDB (NoSQL)
+    - #### The reasons why we use NoSQL (MongoDB)
+
+        - NoSQL databases were created in response to the limitations of traditional relational database technology. 
+
+        - Handle Large Volumes of Data at High Speed with a Scale-Out Architecture
+
+        - Store Unstructured, Semi-Structured, or Structured Data
+
+        - Enable Easy Updates to Schema and Fields Developer-Friendly
 
 ## 3 : Show all required diagrams and explain them.
 
