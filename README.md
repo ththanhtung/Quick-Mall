@@ -225,3 +225,5 @@ The future work part show our efforts to improve the application more in the nea
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+After completing this project, our team has concluded and learned a lot of experiences. To be more specific, we learned technical programming skills like JavaScript, HTML, and CSS. We also know more about NoSQL (MongoDB) database management tools, and associated programming technologies like NodeJS (ExpressJS),... More specifically, we have solved many problems together in the process of working on this project, from which we have learned many lessons in teamwork and working with partners.
