@@ -103,6 +103,16 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ![Tên ảnh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/285077802_559064455773150_2183041147934507601_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=dXq2Ykd_eIYAX_3GLWj&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVJ6d3SCWjuEBqdJIiZ6YYND_lVbaspR3COq6HJNNnr_0A&oe=62C38F4A)
 
 
+#### Search product
+
+![Tên ảnh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/280563617_833973524241226_6038867098382217189_n.png?_nc_cat=101&ccb=1-7&_nc_sid=ae9488&_nc_ohc=GfVDHgYuhigAX-vazCh&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVJqeFqxfcLW2Nd0fTWGoCA10whLVEazGHvG5CYrk0m32g&oe=62C6B240)
+
+
+#### Admin edits product information
+
+![Tên ảnh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/281118365_759371121730050_8042078347225245156_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=MyLSgFQV3joAX9kPVKy&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVLd-R3gkOXY_9geg00t-AvP7sokfVxslubKf8zdw_hZDw&oe=62C3C0EF)
+
+
 ### Class Diagram
 
 ![Tên ảnh](https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/280756930_1309417346248756_1614636446602229793_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=szxBWsqq130AX82HC2W&tn=g8kKPy0vG35jwiCA&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVJAyNKk-RSEhDx11TxILgT0tU3VdUpZDlt9RBohJgzwRQ&oe=62C65669)
